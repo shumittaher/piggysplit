@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+
+    <form action="/register" method="post">
+        <div class="mb-3">
+            <input required autocomplete="off" autofocus class="form-control mx-auto w-auto" name="username" placeholder="Username" type="text">
+        </div>
+        <div class="mb-3">
+            <input required id="psw" class="form-control mx-auto w-auto" name="password" placeholder="Password" type="password">
+        </div>
+        <div class="mb-3">
+            <input required class="form-control mx-auto w-auto" id="pswcon" class="form-control mx-auto w-auto" name="confirmation" placeholder="Re-enter Password" type="password">
+        </div>
+        <button id="register_button" disabled onclick class="btn btn-primary" type="submit">Register</button>
+    </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            function enablebutton() {
+
+                let value1 = document.getElementById("pswcon").value;
+                let value2 = document.getElementById("psw").value;
+                let rel_button = document.getElementById("register_button")
+
+                if (value1) {
+                    if (value1 == value2) {
+                        rel_button.disabled = false
+                    } else {
+                        rel_button.disabled = true
+                    }
+                }
+            }
+
+            document.getElementById("pswcon").addEventListener("keyup", enablebutton)
+            document.getElementById("psw").addEventListener("keyup", enablebutton)
+
+        })
+    </script>
+
+{% endblock %}
