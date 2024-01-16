@@ -46,7 +46,7 @@ def register():
 
         passwordchecked = password_check(password)
         if passwordchecked["password_ok"] == False:
-            flash("More Password Strength required")
+            flash(passwordchecked)
             return redirect("/register")
 
         hash_password = generate_password_hash(password)
@@ -69,16 +69,31 @@ def login():
             flash("Password Required")
             return redirect("/login")
         
-        usernames = db.execute(
+        users = db.execute(
             "SELECT * FROM users WHERE username = ?", request.form.get("username")
         )
 
-        if len(usernames) != 1 or not check_password_hash(
-            usernames[0]["passwordhash"], request.form.get("password")
+        if len(users) != 1 or not check_password_hash(
+            users[0]["passwordhash"], request.form.get("password")
         ):
             flash("Invalid User Name / Password")
             return redirect("/login")
+        
+        session["user_id"] = users[0]["id"]
+        session["username"] = users[0]["username"]
+
+        flash("Logged In")
 
         return redirect("/")
     
     return render_template("login.html")
+
+@app.route("/logout")
+def logout():
+    """Log user out"""
+
+    # Forget any user_id
+    session.clear()
+
+    # Redirect user to login form
+    return redirect("/")
