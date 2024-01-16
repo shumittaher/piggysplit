@@ -13,7 +13,7 @@
 
     <body>
 
-        <nav class="navbar navbar-expand-lg sticky-top" style="background-color: #e3f2fd; padding: 0.75rem;">
+        <nav class="navbar border navbar-expand-lg sticky-top" style="background-color: #e3f2fd; padding: 0.75rem;">
 
             <div class="container-fluid">
                 
@@ -45,14 +45,24 @@
                     </div>
                     <hr class="dropdown-divider">
                     <div class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        
+
                         <div class="nav-item ms-auto mt-2 mt-lg-0">
                             <a class= "nav-link" href="/register">Register</a>
                         </div>
 
+                        {% if session["user_id"] %}
+                        
+                        <div class="nav-item ms-auto mt-2 mt-lg-0">
+                            <a class= "nav-link" href="/logout">Log Out</a>
+                        </div>
+                        
+                        {% else %}
+
                         <div class="nav-item ms-auto mt-2 mt-lg-0">
                             <a class="nav-link" href="/login">Log In</a>
                         </div>
+                        
+                        {% endif %}
 
                     </div>
             
@@ -60,6 +70,14 @@
 
             </div>
         </nav>
+
+        {% if get_flashed_messages() %}
+            <header>
+                <div class="alert alert-primary mb-0 text-center" role="alert">
+                    {{ get_flashed_messages() | join(" ") }}
+                </div>
+            </header>
+        {% endif %}
 
         <main class="container text-center py-5">
 

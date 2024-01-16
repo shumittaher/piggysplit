@@ -36,31 +36,49 @@ def register():
         password = request.form.get("password")
         password_2nd = request.form.get("confirmation")
 
-        # if not username:
-        #     return apology("No username found", 400)
+        if (not username) or (password != password_2nd) or (not password or not password_2nd):
+            flash("ERROR!")
+            return redirect("/register")
 
-        # if db.execute("SELECT username FROM users WHERE username = ?", username):
-        #     return apology("duplicate username found", 400)
-
-        # if password != password_2nd:
-        #     return apology("Invalid Password", 400)
-
-        # if not password or not password_2nd:
-        #     return apology("No password found", 400)
+        if db.execute("SELECT username FROM users WHERE username = ?", username):
+            flash("Username Already Taken")
+            return redirect("/register")
 
         passwordchecked = password_check(password)
         if passwordchecked["password_ok"] == False:
             flash("More Password Strength required")
-            return render_template("register.html")
+            return redirect("/register")
 
         hash_password = generate_password_hash(password)
 
         db.execute("INSERT INTO users (username, passwordhash) VALUES (?,?)", username, hash_password)
 
         return redirect("/login")
+    
     else:
         return render_template("register.html")
     
 @app.route("/login", methods=["GET", "POST"])
-def login():   
+def login():
+    if request.method == "POST":
+
+        if not request.form.get("username"):
+            flash("User Name Required")
+            return redirect("/login")
+        if not request.form.get("password"):
+            flash("Password Required")
+            return redirect("/login")
+        
+        usernames = db.execute(
+            "SELECT * FROM users WHERE username = ?", request.form.get("username")
+        )
+
+        if len(usernames) != 1 or not check_password_hash(
+            usernames[0]["passwordhash"], request.form.get("password")
+        ):
+            flash("Invalid User Name / Password")
+            return redirect("/login")
+
+        return redirect("/")
+    
     return render_template("login.html")
