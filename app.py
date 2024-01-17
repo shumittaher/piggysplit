@@ -1,13 +1,18 @@
+from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
 from helpers import login_required
+
+db = SQL("sqlite:///piggysplit.db")
 from credentials import register, login, logout
+from trips import create
 
 # Configure application
 app = Flask(__name__)
 
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
+
 
 @app.after_request
 def after_request(response):
@@ -36,6 +41,5 @@ def logo():
 
 @app.route("/create", methods=["GET", "POST"])
 @login_required
-def create():
-
-    return render_template("create.html")
+def crea():
+    return create()

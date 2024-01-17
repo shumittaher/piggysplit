@@ -1,9 +1,7 @@
-from cs50 import SQL
 from flask import flash, redirect, render_template, request, session
 from helpers import password_check
 from werkzeug.security import check_password_hash, generate_password_hash
-
-db = SQL("sqlite:///piggysplit.db")
+from app import db
 
 def register():
     """Register user"""
