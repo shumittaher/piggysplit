@@ -1,6 +1,25 @@
 CREATE TABLE users (
-id INTEGER,
-username TEXT NOT NULL,
-passwordhash TEXT NOT NULL,
-PRIMARY KEY (id)
+    id INTEGER,
+    username TEXT NOT NULL,
+    passwordhash TEXT NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE trips (
+    trip_id INTEGER,
+    trip_title TEXT NOT NULL,
+    trip_descrip TEXT,
+    owner_id INTEGER NOT NULL,
+    PRIMARY KEY(trip_id),
+    FOREIGN KEY(owner_id) REFERENCES users(id)
+);
+
+CREATE TABLE participants (
+    relationship_id INTEGER,
+    trip_id INTEGER NOT NULL,
+    participant_id INTEGER,
+    guest_name TEXT,
+    PRIMARY KEY(relationship_id),
+    FOREIGN KEY(trip_id) REFERENCES trips(trip_id)
+    FOREIGN KEY(participant_id) REFERENCES users(id)
 );
