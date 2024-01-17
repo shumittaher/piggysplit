@@ -13,6 +13,10 @@ def create():
 
     return render_template("create.html")
 
-def add_participents():
+def add_participents(trip_id, participent, guest):
 
-    db.execute("INSERT INTO trips (trip_title, trip_descrip, owner_id) VALUES (?,?,?)", tripname, tripdesc, session["user_id"])
+    if not guest:
+        db.execute("INSERT INTO participants (trip_id, participant_id) VALUES (?, ?)", trip_id, participent)
+
+    else:
+        db.execute("INSERT INTO participants (trip_id, guest_name) VALUES (?, ?)", trip_id, participent)
