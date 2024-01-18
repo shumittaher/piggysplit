@@ -5,7 +5,7 @@ Log In
 {% endblock %}
 
 {% block main %}
-<div class="rounded card p-4">
+<div class="rounded card shadow p-4">
     <form action="/login" method="post" class="">
         <div class="mb-3">
             <label for="username" class="form-label mb-0"> Name </label>
@@ -16,8 +16,8 @@ Log In
             <label for="password" class="form-label mb-0"> Password </label>
             <input required id="password" class="form-control" name="password" placeholder="Password" type="password">
         </div>
-        <div class="text-center">
-            <button class="btn btn-primary" type="submit">Log In</button>
+        <div class="mt-4 text-center">
+            <input type="button" class="btn btn-primary" type="submit" value="Log In">
         </div>
     </form>
 </div>
