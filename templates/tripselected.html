@@ -12,7 +12,13 @@
         {{selected_trip}}
     </div>
     <div>
-        {{friends}}
+        <ul>
+            {% for friend in friends %}
+            <li>
+                {{friend.username}}
+            </li>
+            {% endfor %}
+        </ul>
     </div>
 
 {% endblock %}

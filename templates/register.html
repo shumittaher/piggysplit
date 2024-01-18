@@ -5,25 +5,32 @@
 {% endblock %}
 
 {% block main %}
+<div class="rounded card shadow p-4">
 
     <form action="/register" method="post">
         
         <div class="mb-3">
-            <input required autocomplete="off" autofocus class="form-control mx-auto w-auto" name="username" placeholder="Username" type="text">
-            <h6 id="usernameHelp" class="form-text">We'll never share your email with anyone else.</h6>
-        </div>
-
-        
-        <div class="mb-3">
-            <input required id="psw" class="form-control mx-auto w-auto" name="password" placeholder="Password" type="password">
+            <label for="username" class="form-label mb-0"> User Name </label>
+            <input required id="username" autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text">
         </div>
         
         <div class="mb-3">
-            <input required class="form-control mx-auto w-auto" id="pswcon" class="form-control mx-auto w-auto" name="confirmation" placeholder="Re-enter Password" type="password">
+            <label for="password" class="form-label mb-0"> Password </label>
+            <input required id="password" class="form-control" name="password" placeholder="Password" type="password">
+        </div>
+        
+        <div class="mb-3">
+            <label for="passwordcon" class="form-label mb-0"> Confirm Password </label>
+            <input required id="passwordcon" class="form-control mx-auto w-auto" id="pswcon" class="form-control" name="confirmation" placeholder="Re-enter Password" type="password">
         </div>
 
-        <button id="register_button" disabled class="btn btn-primary" type="submit">Register</button>
+        <div class="mt-4 text-center">
+            <button disabled id="register_button" class="btn btn-primary btn-lg" type="submit">Register</button>
+        </div>
+
     </form>
+</div>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
