@@ -29,7 +29,8 @@
       
         <tr>
             <th scope="col" style="border-right: 2px solid black;">Name</th>
-            <th scope="col">Desc</th>
+            <th scope="col" style="border-right: 2px solid black;">Desc</th>
+            <th></th>
         </tr>
     </thead>
     <tbody class="table-group-divider">
@@ -37,16 +38,23 @@
 {% for trip in current_trips %}
 <tr>
     <th scope="row" style="border-right: 2px solid black;">{{trip.trip_title}}</th>
+    <td style="border-right: 2px solid black;">
+        {{trip.trip_descrip}}
+    </td>
     <td>
-{{trip.trip_descrip}}
-</td>
+        <form action="/select" method="post">
+            <input name="trip_id" value="{{trip.trip_id}}" hidden>
+                <button type="submit" class="btn btn-primary">
+                Select
+                </button>
+        </form>
+    </td>
 </tr>
-
 {%endfor%}
-
-
 </tbody>
 </table>
 
-    
+{% block x %}
+{% endblock %}
+
 {% endblock %}

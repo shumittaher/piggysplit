@@ -5,7 +5,7 @@ from helpers import login_required
 
 db = SQL("sqlite:///piggysplit.db")
 from credentials import register, login, logout
-from trips import trips, create
+from trips import trips, create, select
 
 # Configure application
 app = Flask(__name__)
@@ -48,3 +48,8 @@ def trip():
 @login_required
 def crea():
     return create()
+
+@app.route("/select", methods=["POST"])
+@login_required
+def sel():
+    return select()
