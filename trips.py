@@ -16,8 +16,11 @@ def create():
 def select():
 
     selected_trip_id = request.form.get("trip_id")
-    print(selected_trip_id)
-    return render_template("tripselected.html", selected_trip_id = selected_trip_id)
+    selected_trip = db.execute("SELECT * FROM trips WHERE trip_id = ?", selected_trip_id)
+
+    friends = db.execute("SELECT id,username FROM users")
+
+    return render_template("tripselected.html", selected_trip = selected_trip, friends = friends )
 
 def add_participents(trip_id, participent, guest):
     if not guest:
