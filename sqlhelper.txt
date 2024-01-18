@@ -10,6 +10,7 @@ CREATE TABLE trips (
     trip_title TEXT NOT NULL,
     trip_descrip TEXT,
     owner_id INTEGER NOT NULL,
+    closed BOOLEAN NOT NULL DEFAULT False,
     PRIMARY KEY(trip_id),
     FOREIGN KEY(owner_id) REFERENCES users(id)
 );
