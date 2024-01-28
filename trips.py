@@ -24,7 +24,11 @@ def select():
             return redirect("/")
         
         for participant in participants:
-            add_participents(trip_id, participant)
+            print(check_existing(trip_id, participant))
+            if not check_existing(trip_id, participant):
+                add_participents(trip_id, participant)
+            else:
+                flash("Existing Person Not Added")
 
         return redirect(url_for('sel', trip_id = trip_id))
         
@@ -49,3 +53,11 @@ def add_participents(trip_id, participent, guest = ""):
 def owned(trip_id):
     selected_trip = db.execute("SELECT * FROM trips WHERE trip_id = ?", trip_id)
     return (selected_trip[0]["owner_id"]) == session["user_id"]
+
+def check_existing(trip_id, user_id):
+    trips = db.execute("SELECT * FROM participants WHERE trip_id=?", trip_id)
+    for trip in trips:
+        print(trip["participant_id"], user_id)
+        if (int(trip["participant_id"])) == int(user_id):
+            return True
+    return False
