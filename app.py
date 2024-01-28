@@ -49,7 +49,7 @@ def trip():
 def crea():
     return create()
 
-@app.route("/select", methods=["POST"])
+@app.route("/select", methods=["GET","POST"])
 @login_required
 def sel():
     return select()

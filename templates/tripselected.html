@@ -9,26 +9,27 @@
 <h1>{{selected_trip[0].trip_title}}</h1>
 
     <div>
-        {{selected_trip}}
-    </div>
-    <div>
 
-        <form onsubmit="">
+        <form action="/select" method="post">
 
             {% for friend in friends %}
             <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" role="switch" value="{{friend.username}}" id="check{{friend.username}}">
+                <input class="form-check-input" name="participants[]" type="checkbox" role="switch" value="{{friend.id}}" id="check{{friend.username}}">
                 <label class="form-check-label" for="check{{friend.username}}">
                     {{friend.username}}
                 </label>
             </div>
             {% endfor %}
-
+            <input hidden aria-hidden="true" name="trip_id" value="{{selected_trip[0].trip_id}}">
             <div class="mt-4 text-center">
                 <button class="btn btn-primary btn-lg" aria-label="add participants" type="submit">Add</button>
             </div>
             
         </form>
+    </div>
+
+    <div>
+        {{selected_trip}}
     </div>
 
 {% endblock %}
