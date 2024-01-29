@@ -13,14 +13,17 @@
         <form action="/select" method="post">
 
             {% for friend in friends %}
-            <div class="form-check form-switch">
-                <input class="form-check-input participant-checkbox" name="participants[]" type="checkbox" role="switch" value="{{friend.id}}" id="checkbox-{{friend.username}}">
-                <label class="form-check-label" for="check{{friend.username}}">
+
+            <div class="form-check">
+                <input class="form-check-input participant-checkbox" name="participants[]" type="checkbox" value="{{friend.id}}" id="checkbox-{{friend.username}}">
+                <label class="form-check-label" for="checkbox-{{friend.username}}">
                     {{friend.username}}
                 </label>
             </div>
+            
             {% endfor %}
             <input hidden aria-hidden="true" name="trip_id" value="{{selected_trip.trip_id}}">
+            
             <div class="mt-4 text-center">
                 <button class="btn btn-primary btn-lg" aria-label="add participants" type="submit">Add</button>
             </div>
