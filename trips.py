@@ -20,13 +20,15 @@ def select():
         participants = request.form.getlist("participants[]")
         trip_id = request.form.get("trip_id")
         trip = process_trip_id(trip_id)
-        
+
+        # validations
         if not "owner_id" in trip:
             return redirect("/")
 
         if not owned(trip):
             flash("Invalid")
             return redirect("/")
+        #end of validataions
         
         for participant in participants:
             if not check_existing(trip_id, participant):
@@ -39,12 +41,14 @@ def select():
     selected_trip_id = request.args.get("trip_id")
     selected_trip = process_trip_id(selected_trip_id)
 
+    # validations
     if not "owner_id" in selected_trip:
         return redirect("/")
 
     if not owned(selected_trip):
         flash("Unauthorized")
         return redirect("/")
+    #end of validataions
 
     friends = db.execute("SELECT id,username FROM users")
 
