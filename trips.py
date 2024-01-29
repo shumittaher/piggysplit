@@ -1,5 +1,6 @@
 from flask import request, redirect, render_template, session, flash, url_for
 from app import db
+from trips_helpers import process_trip_id, owned, check_existing, add_participents
 
 def trips():
     
@@ -53,28 +54,3 @@ def select():
     friends = db.execute("SELECT id,username FROM users")
 
     return render_template("tripselected.html", selected_trip = selected_trip, friends = friends )
-
-def add_participents(trip_id, participent, guest = ""):
-    if not guest:
-        db.execute("INSERT INTO participants (trip_id, participant_id) VALUES (?, ?)", trip_id, participent)
-    else:
-        db.execute("INSERT INTO participants (trip_id, guest_name) VALUES (?, ?)", trip_id, participent)
-
-def owned(selected_trip):
-    return (selected_trip["owner_id"]) == session["user_id"]
-
-def check_existing(trip_id, user_id):
-    trips = db.execute("SELECT * FROM participants WHERE trip_id=?", trip_id)
-    for trip in trips:
-        if (int(trip["participant_id"])) == int(user_id):
-            return True
-    return False
-
-def process_trip_id(id):
-    selected_trip = {}
-    selected_trip_array = db.execute("SELECT * FROM trips WHERE trip_id = ?", id)
-    if selected_trip_array:
-        selected_trip = selected_trip_array[0]
-    else:
-        flash("Invalid")
-    return selected_trip

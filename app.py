@@ -1,7 +1,7 @@
 from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, session
 from flask_session import Session
-from helpers import login_required
+from cred_helpers import login_required
 
 db = SQL("sqlite:///piggysplit.db")
 from credentials import register, login, logout
