@@ -14,12 +14,17 @@ def create():
     return redirect("/trips")
 
 def select():
-    
+  
     if request.method == "POST":
 
         participants = request.form.getlist("participants[]")
         trip_id = request.form.get("trip_id")
-        if not owned(trip_id):
+        trip = process_trip_id(trip_id)
+        
+        if not "owner_id" in trip:
+            return redirect("/")
+
+        if not owned(trip):
             flash("Invalid")
             return redirect("/")
         
@@ -30,12 +35,15 @@ def select():
                 flash("Existing Person Not Added")
 
         return redirect(url_for('sel', trip_id = trip_id))
-        
-    selected_trip_id = request.args.get("trip_id")
-    selected_trip = db.execute("SELECT * FROM trips WHERE trip_id = ?", selected_trip_id)
 
-    if not owned(selected_trip_id):
-        flash("Invalid")
+    selected_trip_id = request.args.get("trip_id")
+    selected_trip = process_trip_id(selected_trip_id)
+
+    if not "owner_id" in selected_trip:
+        return redirect("/")
+
+    if not owned(selected_trip):
+        flash("Unauthorized")
         return redirect("/")
 
     friends = db.execute("SELECT id,username FROM users")
@@ -48,10 +56,8 @@ def add_participents(trip_id, participent, guest = ""):
     else:
         db.execute("INSERT INTO participants (trip_id, guest_name) VALUES (?, ?)", trip_id, participent)
 
-
-def owned(trip_id):
-    selected_trip = db.execute("SELECT * FROM trips WHERE trip_id = ?", trip_id)
-    return (selected_trip[0]["owner_id"]) == session["user_id"]
+def owned(selected_trip):
+    return (selected_trip["owner_id"]) == session["user_id"]
 
 def check_existing(trip_id, user_id):
     trips = db.execute("SELECT * FROM participants WHERE trip_id=?", trip_id)
@@ -59,3 +65,12 @@ def check_existing(trip_id, user_id):
         if (int(trip["participant_id"])) == int(user_id):
             return True
     return False
+
+def process_trip_id(id):
+    selected_trip = {}
+    selected_trip_array = db.execute("SELECT * FROM trips WHERE trip_id = ?", id)
+    if selected_trip_array:
+        selected_trip = selected_trip_array[0]
+    else:
+        flash("Invalid")
+    return selected_trip
