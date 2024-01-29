@@ -52,5 +52,10 @@ def select():
     #end of validataions
 
     friends = db.execute("SELECT id,username FROM users")
+    participants = db.execute('''SELECT username, id
+                              FROM participants 
+                              JOIN users
+                              ON participant_id = id
+                              WHERE trip_id =?''', selected_trip_id)
 
-    return render_template("tripselected.html", selected_trip = selected_trip, friends = friends )
+    return render_template("tripselected.html", selected_trip = selected_trip, friends = friends, participants = participants)

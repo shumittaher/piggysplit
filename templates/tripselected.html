@@ -14,7 +14,7 @@
 
             {% for friend in friends %}
             <div class="form-check form-switch">
-                <input class="form-check-input" name="participants[]" type="checkbox" role="switch" value="{{friend.id}}" id="check{{friend.username}}">
+                <input class="form-check-input participant-checkbox" name="participants[]" type="checkbox" role="switch" value="{{friend.id}}" id="checkbox-{{friend.username}}">
                 <label class="form-check-label" for="check{{friend.username}}">
                     {{friend.username}}
                 </label>
@@ -29,7 +29,34 @@
     </div>
 
     <div>
-        {{selected_trip}}
+        {% for participant in participants %}
+            <column class="added-participants">
+                {{participant.username}}
+            </column>
+        {% endfor %}
     </div>
+
+
+
+<script>
+    
+    function updateCheckboxes() {
+        
+        var checkboxes = document.querySelectorAll(".participant-checkbox")
+        
+        checkboxes.forEach(box => {
+            box.checked = false;
+        });
+
+        var participants = document.querySelectorAll(".added-participants")
+
+        participants.forEach(participant => {
+            document.getElementById(`checkbox-${(participant.innerText).trim()}`).checked = true;
+        });
+    }
+
+    updateCheckboxes() 
+
+</script>
 
 {% endblock %}
