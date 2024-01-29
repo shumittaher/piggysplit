@@ -22,6 +22,7 @@
             </div>
             
             {% endfor %}
+
             <input hidden aria-hidden="true" name="trip_id" value="{{selected_trip.trip_id}}">
             
             <div class="mt-4 text-center">
@@ -29,17 +30,27 @@
             </div>
             
         </form>
+
     </div>
 
-    <div>
+    <div class="m-5">
+          
+        <h3>Added Friends</h3>
+        
         {% for participant in participants %}
-            <column class="added-participants">
-                {{participant.username}}
-            </column>
+
+            <div class="d-flex justify-content-between align-items-center">
+
+                <h4 class="added-participants">
+                    {{participant.username}}
+                </h4>
+                <button type="button" class="btn-close" aria-label="Remove"></button>
+
+            </div>
+            
         {% endfor %}
+
     </div>
-
-
 
 <script>
     
