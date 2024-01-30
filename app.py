@@ -5,7 +5,7 @@ from cred_helpers import login_required
 
 db = SQL("sqlite:///piggysplit.db")
 from credentials import register, login, logout
-from trips import trips, create, select
+from trips import trips, create, select, remove
 
 # Configure application
 app = Flask(__name__)
@@ -53,3 +53,8 @@ def crea():
 @login_required
 def sel():
     return select()
+
+@app.route("/remove", methods=["POST"])
+@login_required
+def rem():
+    return remove()

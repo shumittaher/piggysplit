@@ -26,3 +26,6 @@ def process_trip_id(id):
     else:
         flash("Invalid")
     return selected_trip
+
+def remove_participants(relationship_id):
+    db.execute("DELETE FROM participants WHERE relationship_id = ?", relationship_id)

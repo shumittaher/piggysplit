@@ -1,6 +1,6 @@
 from flask import request, redirect, render_template, session, flash, url_for
 from app import db
-from trips_helpers import process_trip_id, owned, check_existing, add_participents
+from trips_helpers import process_trip_id, owned, check_existing, add_participents, remove_participants
 
 def trips():
     
@@ -52,10 +52,19 @@ def select():
     #end of validataions
 
     friends = db.execute("SELECT id,username FROM users")
-    participants = db.execute('''SELECT username, id
+    participants = db.execute('''SELECT username, id, relationship_id
                               FROM participants 
                               JOIN users
                               ON participant_id = id
                               WHERE trip_id =?''', selected_trip_id)
 
     return render_template("tripselected.html", selected_trip = selected_trip, friends = friends, participants = participants)
+
+def remove():
+
+    relationship_id = request.form.get("relationship_id")
+    remove_participants(relationship_id)
+    trip_id = request.form.get("trip_id")
+
+    return redirect(url_for('sel', trip_id = trip_id))
+ 
