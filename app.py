@@ -23,7 +23,6 @@ def after_request(response):
     return response
 
 @app.route("/")
-@login_required
 def hello_world():
     return render_template("index.html")
 

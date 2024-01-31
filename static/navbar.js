@@ -1,17 +1,15 @@
-function setActiveRoute(event) {
+function fetchActiveRoute() {
 
-    let pathname = event.target.pathname
-    if (pathname =="/logout"){
-        pathname = "/login"
-    }
-    localStorage.setItem('currentActiveRoute', pathname)
+    let activeroute = location.pathname
+    activeroute == "/select" ? activeroute = "/trips":{}
+    return (activeroute)
     
 }
 
 function updateActiveStatus() {
     
     let links = document.querySelectorAll(".nav-link")
-    let activeRoute = localStorage.getItem('currentActiveRoute')
+    let activeRoute = fetchActiveRoute()
     
     links.forEach(link => {
         if (link.pathname==activeRoute) {
