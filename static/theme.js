@@ -1,10 +1,10 @@
 function chgTheme() {
 
-    var currentTheme = getPreferredTheme()
+    let currentTheme = getPreferredTheme()
     if (currentTheme === 'dark') {
-        var currentTheme = 'light'
+        currentTheme = 'light'
     } else {
-        var currentTheme = 'dark'
+        currentTheme = 'dark'
     }
     setStoredTheme(currentTheme)    
     setTheme()

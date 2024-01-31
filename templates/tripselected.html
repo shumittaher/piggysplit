@@ -60,7 +60,7 @@
     
     function updateCheckboxes() {
 
-        var participants = document.querySelectorAll(".added-participants")
+        let participants = document.querySelectorAll(".added-participants")
 
         participants.forEach(participant => {
             document.getElementById(`checkbox-${(participant.innerText).trim()}`).checked = true;
