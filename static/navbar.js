@@ -11,16 +11,18 @@ function updateActiveStatus() {
     let links = document.querySelectorAll(".nav-link")
     let activeRoute = fetchActiveRoute()
     
-    links.forEach(link => {
-        if (link.pathname==activeRoute) {
-            link.classList.add("active")
-            link.ariaCurrent = "page"
+    for (let index = 0; index < links.length-1; index++) {
+            
+        if (links[index].pathname==activeRoute) {
+            links[index].classList.add("active")
+            links[index].ariaCurrent = "page"
+            break
         } else {
-            link.classList.remove("active")
-            link.removeAttribute("ariaCurrent")
+            links[index].classList.remove("active")
+            links[index].removeAttribute("ariaCurrent")
         }
-    });
-    
+                
+        }
 }
 
 updateActiveStatus()
