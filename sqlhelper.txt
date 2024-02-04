@@ -24,3 +24,12 @@ CREATE TABLE participants (
     FOREIGN KEY(trip_id) REFERENCES trips(trip_id)
     FOREIGN KEY(participant_id) REFERENCES users(id)
 );
+
+CREATE TABLE costs (
+    cost_id INTEGER,
+    trip_id INTEGER NOT NULL,
+    cost_head TEXT,
+    cost_amount DECIMAL,
+    PRIMARY KEY(cost_id),
+    FOREIGN KEY(trip_id) REFERENCES trips(trip_id)
+);

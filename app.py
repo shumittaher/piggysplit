@@ -1,11 +1,12 @@
 from cs50 import SQL
-from flask import Flask, flash, redirect, render_template, request, session
+from flask import Flask, flash, redirect, render_template, request, jsonify
 from flask_session import Session
 from cred_helpers import login_required
 
 db = SQL("sqlite:///piggysplit.db")
 from credentials import register, login, logout
 from trips import trips, create, select, remove
+from costs import costs
 
 # Configure application
 app = Flask(__name__)
@@ -57,3 +58,17 @@ def sel():
 @login_required
 def rem():
     return remove()
+
+@app.route("/costs", methods=["GET","POST"])
+@login_required
+def cos():
+    return costs()
+
+# @app.route("/process_data", methods=["POST"])
+# def process_data():
+    
+#     data = request.get_json()  # Get the JSON data from the request
+#     # Process the data
+#     result = data.get('data') * 2  # Example processing (multiplying by 2)
+#     # Return a JSON response
+#     return jsonify({'result': result})

@@ -8,7 +8,7 @@
 
 <div>
 
-    <form action="/create" method="post" style="border: 1px solid black;">
+    <form action="/create" method="post">
         
         <div class="mb-3">
             <input aria-label="Trip Name" required autocomplete="off" autofocus class="form-control" name="tripname" placeholder="Trip Name" type="text">
@@ -33,16 +33,16 @@
             <thead>
                 
                 <tr>
-                    <th scope="col" style="border-right: 2px solid black;">Name</th>
-                    <th scope="col" style="border-right: 2px solid black;">Desc</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Desc</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody class="table-group-divider">
                 {% for trip in current_trips %}
                 <tr>
-                    <th scope="row" style="border-right: 2px solid black;">{{trip.trip_title}}</th>
-                    <td style="border-right: 2px solid black;">
+                    <th scope="row">{{trip.trip_title}}</th>
+                    <td>
                         {{trip.trip_descrip}}
                     </td>
                     <td>

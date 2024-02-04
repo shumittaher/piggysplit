@@ -56,6 +56,19 @@
 
     </div>
 
+    <div>
+        <form action="/costs" method="get">
+            <input name="trip_id" value="{{selected_trip.trip_id}}" hidden>
+            <button type="submit" class="btn btn-primary btn-lg">
+                Add Costs
+            </button>
+        </form>
+    </div>
+    
+    <!-- <button onclick="processData()" class="btn btn-lg btn-primary">
+        test button {{result}}
+    </button> -->
+
 <script>
     
     function updateCheckboxes() {
@@ -68,6 +81,17 @@
     }
 
     updateCheckboxes() 
+
+    // function processData() {
+    //     fetch('/process_data', {
+    //         method: 'POST',
+    //         headers: { 'Content-Type': 'application/json' },
+    //         body: JSON.stringify({ data: 2 })
+    //     })
+    //     .then(response => response.json())
+    //     .then(data => console.log(data))
+    //     .catch(error => console.error(error));
+    // }
 
 </script>
 

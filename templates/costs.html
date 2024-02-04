@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    
+{% endblock %}
+
+{% block main %}
+
+<h1>{{selected_trip.trip_title}}</h1>
+
+
+
+    <div>
+
+        <form action="/costs" method="post">
+
+            <div class="d-flex mb-3">
+                <textarea aria-label="Cost Description" class="form-control me-2" name="costhead" placeholder="Cost Description" rows="1"></textarea>
+                <input aria-label="amount" required autocomplete="off" class="form-control" name="amount" placeholder="Amount" type="number">
+                <input name="trip_id" value="{{selected_trip.trip_id}}" hidden>
+            </div>
+
+            <div class="text-center">
+                <button aria-label="submit" class="btn btn-primary btn-lg" type="submit">Add Cost</button>
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="mt-5">
+
+        
+    </div>
+
+
+<script>
+
+</script>
+
+{% endblock %}
