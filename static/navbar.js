@@ -1,7 +1,7 @@
 function fetchActiveRoute() {
 
     let activeroute = location.pathname
-    
+
     if (activeroute == "/select" || activeroute == "/costs") 
         {activeroute = "/trips"}
 
@@ -15,7 +15,7 @@ function updateActiveStatus() {
     let activeRoute = fetchActiveRoute()
     
     for (let index = 0; index < links.length-1; index++) {
-            
+        
         if (links[index].pathname==activeRoute) {
             links[index].classList.add("active")
             links[index].ariaCurrent = "page"

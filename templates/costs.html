@@ -15,8 +15,14 @@
         <form action="/costs" method="post">
 
             <div class="d-flex mb-3">
-                <textarea aria-label="Cost Description" class="form-control me-2" name="costhead" placeholder="Cost Description" rows="1"></textarea>
-                <input aria-label="amount" required autocomplete="off" class="form-control" name="amount" placeholder="Amount" type="number" step=".01">
+                <textarea aria-label="Cost Description" class="form-control" name="costhead" placeholder="Cost Description" rows="1"></textarea>
+                <input aria-label="amount" required autocomplete="off" class="form-control mx-1" name="amount" placeholder="Amount" type="number" step=".01">
+                <select class="form-select" name="cost_party" aria-label="cost party">
+                    <option selected value="0">Equally Divided</option>
+                    {% for participant in participants %}
+                    <option value="{{participant.id}}">{{participant.username}}</option>
+                    {% endfor %}
+                </select>
                 <input name="trip_id" value="{{selected_trip.trip_id}}" hidden>
             </div>
 
@@ -44,6 +50,7 @@
                 <tr>
                     <th scope="col">Cost Head</th>
                     <th scope="col" class="text-end">Amount</th>
+                    <th scope="col">Borne By</th>
                     <th></th>
                 </tr>
             </thead>
@@ -56,6 +63,9 @@
                     </th>
                     <td class="text-end">
                         {{ "%.2f"|format(cost_line.cost_amount) }}
+                    </td>
+                    <td>
+                        {{cost_line.username}}
                     </td>
                     <td>
                         <form action="/remove_cost" method="post" class="d-flex justify-content-between align-items-center">
