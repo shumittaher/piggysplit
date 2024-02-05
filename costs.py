@@ -1,6 +1,6 @@
 from flask import request, redirect, render_template, session, flash, url_for
 from trips_helpers import process_trip_id, owned, get_participants
-from costs_helpers import add_costs, remove_costline
+from costs_helpers import add_costs, remove_costline, total_trip_cost, fetch_costlines
 from app import db
 
 
@@ -22,19 +22,9 @@ def costs():
     selected_trip_id = request.args.get("trip_id")
     selected_trip = process_trip_id(selected_trip_id)
 
-    cost_lines = db.execute('''SELECT * 
-                            FROM costs
-                            LEFT JOIN users
-                            ON cost_party = id
-                            WHERE trip_id = ?
-                            ''', selected_trip_id)
+    cost_lines = fetch_costlines(selected_trip_id)
     
-    total_cost = 0
-
-    for cost_line in cost_lines:
-        if not cost_line["username"]:
-            cost_line["username"] = "Equal"
-        total_cost += cost_line["cost_amount"]
+    total_cost = total_trip_cost(selected_trip_id)
 
     participants = get_participants(selected_trip_id)
 

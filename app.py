@@ -7,6 +7,7 @@ db = SQL("sqlite:///piggysplit.db")
 from credentials import register, login, logout
 from trips import trips, create, select, remove
 from costs import costs, remove_cost
+from result import result
 
 # Configure application
 app = Flask(__name__)
@@ -68,6 +69,11 @@ def cos():
 @login_required
 def rem_cost():
     return remove_cost()
+
+@app.route("/result", methods=["GET","POST"])
+@login_required
+def res():
+    return result()
 
 # @app.route("/process_data", methods=["POST"])
 # def process_data():
