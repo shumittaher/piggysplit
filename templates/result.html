@@ -6,7 +6,40 @@
 
 {% block main %}
 
+<table class="table caption-top table-striped">
+    <caption style="text-align: center;">
+        <h3>Report</h3>
+    </caption>
 
-    
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Receivable</th>
+            <th scope="col">Payable</th>
+        </tr>
+    </thead>
+
+    <tbody class="table-group-divider">
+        
+        {% for outstanding in outstandings %}
+        <tr>
+            <th scope="row">
+                {{outstanding.recipient}}
+            </th>
+            <td>
+                {% if outstanding.receivable == 1 %}
+                {{"%.2f"|format(outstanding.amount)}}
+                {% endif %}
+            </td>
+            <td>
+                {% if outstanding.receivable == 0 %}
+                {{"%.2f"|format(outstanding.amount)}}
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
 
 {% endblock %}

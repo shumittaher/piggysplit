@@ -41,7 +41,7 @@ def get_common_cost(trip_id):
         if cost_line["cost_party"] ==0:
             total_common_cost += cost_line["cost_amount"]
 
-    return total_common_cost / participant_count
+    return round(total_common_cost / participant_count,2)
 
 def get_induvidual_cost(trip_id, person_id):
 

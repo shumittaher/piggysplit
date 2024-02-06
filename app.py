@@ -7,6 +7,7 @@ db = SQL("sqlite:///piggysplit.db")
 from credentials import register, login, logout
 from trips import trips, create, select, remove
 from costs import costs, remove_cost
+from payments import payments
 from result import result
 
 # Configure application
@@ -64,6 +65,11 @@ def rem():
 @login_required
 def cos():
     return costs()
+
+@app.route("/payments", methods=["GET","POST"])
+@login_required
+def pay():
+    return payments()
 
 @app.route("/remove_cost", methods=["POST"])
 @login_required
