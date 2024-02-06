@@ -13,9 +13,9 @@
 
     <thead>
         <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Receivable</th>
-            <th scope="col">Payable</th>
+            <th scope="col" class="text-center">Name</th>
+            <th scope="col" class="text-center">Receivable</th>
+            <th scope="col" class="text-center">Payable</th>
         </tr>
     </thead>
 
@@ -23,15 +23,15 @@
         
         {% for outstanding in outstandings %}
         <tr>
-            <th scope="row">
+            <th scope="row" class="text-center">
                 {{outstanding.recipient}}
             </th>
-            <td>
+            <td class="text-center">
                 {% if outstanding.receivable == 1 %}
                 {{"%.2f"|format(outstanding.amount)}}
                 {% endif %}
             </td>
-            <td>
+            <td class="text-center">
                 {% if outstanding.receivable == 0 %}
                 {{"%.2f"|format(outstanding.amount)}}
                 {% endif %}

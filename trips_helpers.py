@@ -36,3 +36,10 @@ def get_participants(selected_trip_id):
                               JOIN users
                               ON participant_id = id
                               WHERE trip_id =?''', selected_trip_id)
+
+def fetch_user_trips(user_id):
+    return db.execute('''SELECT * 
+               FROM trips
+               LEFT JOIN participants
+               ON trips.trip_id = participants.trip_id
+               WHERE participant_id = ?''', user_id) 
