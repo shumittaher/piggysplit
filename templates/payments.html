@@ -9,10 +9,31 @@
 {{users_trips}}
 
 <form>
-    
+    <select onchange="submit_trip(event)" required class="form-select" aria-label="Trip Selection" name="trip">
+        <option disabled selected>Select Trip</option>
+        {% for users_trip in users_trips %}
+        <option value="{{users_trip.trip_id}}">{{users_trip.trip_title}}</option>
+        {% endfor %}
+    </select>
 </form>
 
 <script>
+
+function submit_trip(event) {
+    const trip_id = event.target.value
+    fetch_trip(trip_id)
+}
+
+function fetch_trip(trip_id) {
+    fetch('/trip_payments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ "trip_id": trip_id })
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error(error));
+}
 
 </script>
 

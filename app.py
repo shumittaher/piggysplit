@@ -6,6 +6,7 @@ from cred_helpers import login_required
 db = SQL("sqlite:///piggysplit.db")
 from credentials import register, login, logout
 from trips import trips, create, select, remove
+from trips_helpers import process_trip_id
 from costs import costs, remove_cost
 from payments import payments
 from result import result
@@ -81,11 +82,8 @@ def rem_cost():
 def res():
     return result()
 
-# @app.route("/process_data", methods=["POST"])
-# def process_data():
-    
-#     data = request.get_json()  # Get the JSON data from the request
-#     # Process the data
-#     result = data.get('data') * 2  # Example processing (multiplying by 2)
-#     # Return a JSON response
-#     return jsonify({'result': result})
+@app.route("/trip_payments", methods=["POST"])
+def process_data():
+    trip_id = request.get_json().get('trip_id')
+    trip_data = process_trip_id(trip_id)
+    return jsonify({'trip_data': trip_data})
