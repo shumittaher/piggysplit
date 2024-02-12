@@ -20,6 +20,7 @@
 <div hidden id="payment_form_area" class="my-3">
     <h5 class="text-center mb-5" id="trip_desc_area"></h5>
     <form class="d-flex" method="post">
+        <input hidden id="trip_id_area" name="trip_id">
         <input name="payment_amount" type="number">
         <select class="form-select mx-1" aria-label="participant Selection" name="participant_id" id="participant_options">
         </select>
@@ -42,6 +43,9 @@ function place_trips_details(data) {
     const participants = data.participants_data
     trip_desc_area = document.getElementById("trip_desc_area")
     trip_desc_area.innerHTML = `${trip_descrip}`
+
+    trip_id_area = document.getElementById("trip_id_area")
+    trip_id_area.value = `${trip_id}`
 
     participant_options = document.getElementById("participant_options")
     participant_options.innerHTML = "<option value='0'>Vendor</option>"
