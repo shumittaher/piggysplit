@@ -17,11 +17,11 @@
     </select>
 </form>
 
-<div hidden id="payment_form_area" class="my-5">
-    <h5 id="trip_desc_area"></h5>
-    <form class="d-flex">
-        <input type="number">
-        <select class="form-select" aria-label="participant Selection" name="participant" id="participant_options">
+<div hidden id="payment_form_area" class="my-3">
+    <h5 class="text-center mb-5" id="trip_desc_area"></h5>
+    <form class="d-flex" method="post">
+        <input name="payment_amount" type="number">
+        <select class="form-select mx-1" aria-label="participant Selection" name="participant_id" id="participant_options">
         </select>
         <input class="btn btn-outline-primary" type="submit">
     </form>
@@ -44,7 +44,7 @@ function place_trips_details(data) {
     trip_desc_area.innerHTML = `${trip_descrip}`
 
     participant_options = document.getElementById("participant_options")
-    participant_options.innerHTML = ""
+    participant_options.innerHTML = "<option value='0'>Vendor</option>"
     participants.forEach(participant => {
         participant_options.innerHTML += `
                         <option value="${participant.id}">${participant.username}</option>
