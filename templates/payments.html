@@ -17,11 +17,34 @@
     </select>
 </form>
 
+<div class="my-5" id="payment_details_area">
+    <h5>${trip_descrip}</h5>
+    <form >
+        <input >
+        <select>
+            <option>
+            </option>
+        </select>
+        <input>
+    </form>
+</div>
+
 <script>
 
 function submit_trip(event) {
     const trip_id = event.target.value
     fetch_trip(trip_id)
+}
+
+function place_trips_details(data) {
+
+    const {closed, owner_id, trip_descrip, trip_id, trip_title} = data.trip_data
+    const participants = data.participants_data
+    place_area = document.getElementById("payment_details_area")
+    place_area.innerHTML = `
+    <div>
+
+    </div>`
 }
 
 function fetch_trip(trip_id) {
@@ -31,7 +54,7 @@ function fetch_trip(trip_id) {
         body: JSON.stringify({ "trip_id": trip_id })
     })
     .then(response => response.json())
-    .then(data => console.log(data))
+    .then(data => place_trips_details(data))
     .catch(error => console.error(error));
 }
 
