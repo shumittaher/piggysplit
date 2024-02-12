@@ -17,17 +17,14 @@
     </select>
 </form>
 
-<div class="my-5" id="payment_details_area">
-    <!-- <h5>${trip_descrip}</h5>
-    <form >
-        <input >
-        <select>
-            {% for participant in participants %}
-            <option>{{participant.username}}</option>
-            {% endfor %}
+<div hidden id="payment_form_area" class="my-5">
+    <h5 id="trip_desc_area"></h5>
+    <form class="d-flex">
+        <input type="number">
+        <select class="form-select" aria-label="participant Selection" name="participant" id="participant_options">
         </select>
-        <input>
-    </form> -->
+        <input class="btn btn-outline-primary" type="submit">
+    </form>
 </div>
 
 <script>
@@ -39,25 +36,18 @@ function submit_trip(event) {
 
 function place_trips_details(data) {
 
+    payment_form_area = document.getElementById("payment_form_area")
+    payment_form_area.hidden = false
     const {closed, owner_id, trip_descrip, trip_id, trip_title} = data.trip_data
     const participants = data.participants_data
-    payment_details_area = document.getElementById("payment_details_area")
-    payment_details_area.innerHTML = `
-    <div>
-        <div class="my-5" id="payment_details_area">
-            <h5>${trip_descrip}</h5>
-            <form>
-                <input>
-                <select id="participant_options">
-                </select>
-                <input>
-            </form>
-        </div>
-    </div>`
+    trip_desc_area = document.getElementById("trip_desc_area")
+    trip_desc_area.innerHTML = `${trip_descrip}`
+
     participant_options = document.getElementById("participant_options")
+    participant_options.innerHTML = ""
     participants.forEach(participant => {
         participant_options.innerHTML += `
-                        <option>${participant.username}</option>
+                        <option value="${participant.id}">${participant.username}</option>
                         `
         })
 }   
