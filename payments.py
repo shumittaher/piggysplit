@@ -7,7 +7,6 @@ def payments():
         participant_id = request.form.get("participant_id")
         payment_amount = request.form.get("payment_amount")
         trip_id = request.form.get("trip_id")
-        print(participant_id, payment_amount, trip_id)
 
     user_id = session.get("user_id")
     users_trips = fetch_user_trips(user_id)
