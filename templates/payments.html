@@ -18,15 +18,16 @@
 </form>
 
 <div class="my-5" id="payment_details_area">
-    <h5>${trip_descrip}</h5>
+    <!-- <h5>${trip_descrip}</h5>
     <form >
         <input >
         <select>
-            <option>
-            </option>
+            {% for participant in participants %}
+            <option>{{participant.username}}</option>
+            {% endfor %}
         </select>
         <input>
-    </form>
+    </form> -->
 </div>
 
 <script>
@@ -40,12 +41,27 @@ function place_trips_details(data) {
 
     const {closed, owner_id, trip_descrip, trip_id, trip_title} = data.trip_data
     const participants = data.participants_data
-    place_area = document.getElementById("payment_details_area")
-    place_area.innerHTML = `
+    payment_details_area = document.getElementById("payment_details_area")
+    payment_details_area.innerHTML = `
     <div>
-
+        <div class="my-5" id="payment_details_area">
+            <h5>${trip_descrip}</h5>
+            <form>
+                <input>
+                <select id="participant_options">
+                </select>
+                <input>
+            </form>
+        </div>
     </div>`
-}
+    participant_options = document.getElementById("participant_options")
+    participants.forEach(participant => {
+        participant_options.innerHTML += `
+                        <option>${participant.username}</option>
+                        `
+        })
+}   
+
 
 function fetch_trip(trip_id) {
     fetch('/trip_payments', {
