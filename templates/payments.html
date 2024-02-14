@@ -21,7 +21,8 @@
     <h5 class="text-center mb-5" id="trip_desc_area"></h5>
     <form class="d-flex" method="post">
         <input hidden id="trip_id_area" name="trip_id">
-        <input name="payment_amount" type="number">
+        <textarea aria-label="Payment Details" class="form-control" name="payment_desc" placeholder="Payment Details" rows="1"></textarea>
+        <input class="form-control" name="payment_amount" type="number">
         <select class="form-select mx-1" aria-label="participant Selection" name="participant_id" id="participant_options">
         </select>
         <input class="btn btn-outline-primary" type="submit">

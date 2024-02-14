@@ -40,7 +40,9 @@ CREATE TABLE payments (
     trip_id INTEGER NOT NULL,
     payment_description TEXT,
     payment_amount DECIMAL,
-    paid_to INTEGER NOT NULL DEFAULT 0,
+    paid_to INTEGER NOT NULL DEFAULT 0, 
+    payer_id INTEGER NOT NULL,
     PRIMARY KEY(payment_id),
     FOREIGN KEY(trip_id) REFERENCES trips(trip_id)
 );
+
