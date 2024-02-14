@@ -1,5 +1,5 @@
 from flask import flash, redirect, render_template, request, session
-from cred_helpers import password_check
+from cred_helpers import password_check, login_required
 from werkzeug.security import check_password_hash, generate_password_hash
 from app import db
 

@@ -1,14 +1,12 @@
 from cs50 import SQL
 from flask import Flask, flash, redirect, render_template, request, jsonify
 from flask_session import Session
-from cred_helpers import login_required
-
 db = SQL("sqlite:///piggysplit.db")
-from credentials import register, login, logout
-from trips import trips, create, select, remove
-from trips_helpers import process_trip_id, get_participants
+
+from credentials import register, login, logout,login_required
+from trips import trips, create, select, remove, process_trip_id, get_participants
 from costs import costs, remove_cost
-from payments import payments
+from payments import payments, fetch_tripwise_payments
 from result import result
 
 # Configure application
@@ -87,4 +85,5 @@ def process_data():
     trip_id = request.get_json().get('trip_id')
     trip_data = process_trip_id(trip_id)
     participants_data = get_participants(trip_id)
-    return jsonify({'trip_data': trip_data, 'participants_data': participants_data})
+    payments_data = fetch_tripwise_payments(trip_id)
+    return jsonify({'trip_data': trip_data, 'participants_data': participants_data, 'payments_data': payments_data})
