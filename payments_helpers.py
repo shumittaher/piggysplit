@@ -9,5 +9,7 @@ def record_payment(payer_id, payee_id, trip_id, payment_desc, payment_amount):
 def fetch_tripwise_payments(trip_id):
     return db.execute('''SELECT *
                       FROM payments
+                      LEFT JOIN users
+                      ON paid_to = id
                       WHERE trip_id = ?
                       ''', trip_id)

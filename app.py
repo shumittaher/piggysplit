@@ -1,12 +1,12 @@
 from cs50 import SQL
-from flask import Flask, flash, redirect, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify
 from flask_session import Session
 db = SQL("sqlite:///piggysplit.db")
 
-from credentials import register, login, logout,login_required
+from credentials import register, login, logout,login_required, session
 from trips import trips, create, select, remove, process_trip_id, get_participants
 from costs import costs, remove_cost
-from payments import payments, fetch_tripwise_payments
+from payments import payments, fetch_tripwise_payments, record_payment
 from result import result
 
 # Configure application
@@ -65,7 +65,7 @@ def rem():
 def cos():
     return costs()
 
-@app.route("/payments", methods=["GET","POST"])
+@app.route("/payments")
 @login_required
 def pay():
     return payments()
@@ -86,4 +86,23 @@ def process_data():
     trip_data = process_trip_id(trip_id)
     participants_data = get_participants(trip_id)
     payments_data = fetch_tripwise_payments(trip_id)
+
     return jsonify({'trip_data': trip_data, 'participants_data': participants_data, 'payments_data': payments_data})
+
+@app.route("/record_payments", methods=["POST"])
+def record_payments():
+    payments_row = request.get_json().get('payments_row')
+
+    participant_id = payments_row["participant_id"]
+    payment_amount = payments_row["payment_amount"]
+    payment_desc = payments_row["payment_desc"]
+    trip_id = payments_row["trip_id"]
+
+    user_id = session.get("user_id")
+
+    record_payment(user_id, participant_id, trip_id, payment_desc, payment_amount)
+
+    payments_data = fetch_tripwise_payments(trip_id)
+
+    return jsonify({'payments_data': payments_data})
+

@@ -19,7 +19,7 @@
 
 <div hidden id="payment_form_area" class="my-3">
     <h5 class="text-center mb-5" id="trip_desc_area"></h5>
-    <form class="d-flex" method="post">
+    <form onsubmit="submit_payment(event)" class="d-flex" method="post">
         <input hidden id="trip_id_area" name="trip_id">
         <textarea aria-label="Payment Details" class="form-control" name="payment_desc" placeholder="Payment Details" rows="1"></textarea>
         <input class="form-control" name="payment_amount" type="number">
