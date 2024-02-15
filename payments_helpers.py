@@ -13,3 +13,7 @@ def fetch_tripwise_payments(trip_id):
                       ON paid_to = id
                       WHERE trip_id = ?
                       ''', trip_id)
+
+def delete_payment(payment_id):
+    db.execute('''DELETE FROM payments
+               WHERE payment_id = ?''', payment_id)

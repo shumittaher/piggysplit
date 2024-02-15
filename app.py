@@ -6,7 +6,7 @@ db = SQL("sqlite:///piggysplit.db")
 from credentials import register, login, logout,login_required, session
 from trips import trips, create, select, remove, process_trip_id, get_participants
 from costs import costs, remove_cost
-from payments import payments, fetch_tripwise_payments, record_payment
+from payments import payments, fetch_tripwise_payments, record_payment, delete_payment
 from result import result
 
 # Configure application
@@ -82,7 +82,7 @@ def res():
 
 @app.route("/trip_payments", methods=["POST"])
 def process_data():
-    trip_id = request.get_json().get('trip_id')
+    trip_id = request.get_json().get('data')
     trip_data = process_trip_id(trip_id)
     participants_data = get_participants(trip_id)
     payments_data = fetch_tripwise_payments(trip_id)
@@ -91,7 +91,7 @@ def process_data():
 
 @app.route("/record_payments", methods=["POST"])
 def record_payments():
-    payments_row = request.get_json().get('payments_row')
+    payments_row = request.get_json().get('data')
 
     participant_id = payments_row["participant_id"]
     payment_amount = payments_row["payment_amount"]
@@ -101,6 +101,20 @@ def record_payments():
     user_id = session.get("user_id")
 
     record_payment(user_id, participant_id, trip_id, payment_desc, payment_amount)
+
+    payments_data = fetch_tripwise_payments(trip_id)
+
+    return jsonify({'payments_data': payments_data})
+
+@app.route("/delete_payments", methods=["POST"])
+def remove_payment():
+    
+    payments_row = request.get_json().get('data')
+
+    trip_id = payments_row["trip_id"]
+    payment_id = payments_row["payment_id"]
+
+    delete_payment(payment_id)
 
     payments_data = fetch_tripwise_payments(trip_id)
 

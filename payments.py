@@ -1,6 +1,6 @@
 from flask import render_template, session, request, redirect
 from trips_helpers import fetch_user_trips
-from payments_helpers import record_payment, fetch_tripwise_payments
+from payments_helpers import record_payment, fetch_tripwise_payments, delete_payment
 
 def payments():
     
