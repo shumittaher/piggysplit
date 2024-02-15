@@ -24,7 +24,7 @@
         {% for outstanding in outstandings %}
         <tr>
             <th scope="row" class="text-center">
-                {{outstanding.recipient}}
+                {{outstanding.party}}
             </th>
             <td class="text-center">
                 {% if outstanding.receivable == 1 %}

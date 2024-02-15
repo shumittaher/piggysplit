@@ -17,3 +17,22 @@ def fetch_tripwise_payments(trip_id):
 def delete_payment(payment_id):
     db.execute('''DELETE FROM payments
                WHERE payment_id = ?''', payment_id)
+
+def fetch_tripwise_payments_as_for_id(trip_id, id, placement):
+    return db.execute(f"SELECT * FROM payments LEFT JOIN users ON {placement} = id WHERE trip_id = ? AND {placement} = ?", trip_id, id)
+
+def total_recevied(trip_id, payee_id):
+
+    payments = fetch_tripwise_payments_as_for_id(trip_id, payee_id, "paid_to")
+    return sum_payment(payments)
+
+def total_paid(trip_id, payer_id):
+    
+    payments = fetch_tripwise_payments_as_for_id(trip_id, payer_id, "payer_id")
+    return sum_payment(payments)
+
+def sum_payment(payments):
+    amount = 0
+    for row in payments:
+        amount += row["payment_amount"]
+    return amount
