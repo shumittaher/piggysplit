@@ -16,10 +16,14 @@
             <th scope="col" class="text-center">Name</th>
             <th scope="col" class="text-center">Receivable</th>
             <th scope="col" class="text-center">Payable</th>
+            <th scope="col" class="text-center">Received</th>
+            <th scope="col" class="text-center">Paid</th>
+            <th scope="col" class="text-center">Outstanding</th>
         </tr>
     </thead>
 
     <tbody class="table-group-divider">
+
         
         {% for outstanding in outstandings %}
         <tr>
@@ -27,14 +31,20 @@
                 {{outstanding.party}}
             </th>
             <td class="text-center">
-                {% if outstanding.receivable == 1 %}
-                {{"%.2f"|format(outstanding.amount)}}
-                {% endif %}
+                {{"%.2f"|format(outstanding.receivable_amount)}}
             </td>
             <td class="text-center">
-                {% if outstanding.receivable == 0 %}
-                {{"%.2f"|format(outstanding.amount)}}
-                {% endif %}
+                {{"%.2f"|format(outstanding.payable_amounts)}}
+            </td>
+            <td class="text-center">
+                {{"%.2f"|format(outstanding.received_amount)}}
+            </td>
+            <td class="text-center">
+                {{"%.2f"|format(outstanding.paid_amounts)}}
+            </td>
+            <td class="text-center">
+                {{"%.2f"|format(outstanding.outstanding_amount)}}
+
             </td>
         </tr>
         {% endfor %}
