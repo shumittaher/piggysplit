@@ -2,8 +2,8 @@ function fetchActiveRoute() {
 
     let activeroute = location.pathname
 
-    if (activeroute == "/select" || activeroute == "/costs") 
-        {activeroute = "/trips"}
+    if (activeroute == "/select") 
+        {activeroute = "/participants"}
 
     return (activeroute)
     

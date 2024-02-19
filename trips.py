@@ -1,11 +1,11 @@
 from flask import request, redirect, render_template, session, flash, url_for
 from app import db
-from trips_helpers import process_trip_id, owned, check_existing, add_participents, remove_participants, get_participants
+from trips_helpers import process_trip_id, owned, check_existing, add_participents, remove_participants, get_participants, fetch_owned_trips
 
 def trips():
     
-    current_trips = db.execute("SELECT * FROM trips WHERE owner_id = ? AND closed = FALSE", session["user_id"])
-    return render_template("trips.html", current_trips = current_trips)
+    owned_trips = fetch_owned_trips(session["user_id"])
+    return render_template("trips.html", current_trips = owned_trips)
 
 def create():
     tripname = request.form.get("tripname")
@@ -14,7 +14,7 @@ def create():
     flash("Trip Recorded")
     return redirect("/trips")
 
-def select():
+def select_participants():
   
     if request.method == "POST":
 
@@ -56,11 +56,16 @@ def select():
 
     return render_template("tripselected.html", selected_trip = selected_trip, friends = friends, participants = participants)
 
-def remove():
+def remove_participants():
 
     relationship_id = request.form.get("relationship_id")
     remove_participants(relationship_id)
     trip_id = request.form.get("trip_id")
 
     return redirect(url_for('sel', trip_id = trip_id))
+
+def participant_selection():
+    
+    owned_trips = fetch_owned_trips(session["user_id"])
+    return render_template("participant_selection.html", current_trips = owned_trips)
  

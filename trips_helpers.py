@@ -1,6 +1,8 @@
 from flask import session, flash
 from app import db
 
+def fetch_owned_trips(user_id):
+    return db.execute("SELECT * FROM trips WHERE owner_id = ? AND closed = FALSE", user_id)
 
 def add_participents(trip_id, participent, guest = ""):
     if not guest:

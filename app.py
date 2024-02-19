@@ -4,7 +4,7 @@ from flask_session import Session
 db = SQL("sqlite:///piggysplit.db")
 
 from credentials import register, login, logout,login_required, session
-from trips import trips, create, select, remove, process_trip_id, get_participants
+from trips import trips, create, select_participants, remove_participants, process_trip_id, get_participants, participant_selection
 from costs import costs, remove_cost
 from payments import payments, fetch_tripwise_payments, record_payment, delete_payment
 from result import result
@@ -25,7 +25,7 @@ def after_request(response):
     return response
 
 @app.route("/")
-def hello_world():
+def home():
     return render_template("index.html")
 
 @app.route("/register", methods=["GET", "POST"])
@@ -47,18 +47,23 @@ def trip():
 
 @app.route("/create", methods=["POST"])
 @login_required
-def crea():
+def trip_creation():
     return create()
+
+@app.route("/participants")
+@login_required
+def trip_sel():
+    return participant_selection()
 
 @app.route("/select", methods=["GET","POST"])
 @login_required
 def sel():
-    return select()
+    return select_participants()
 
 @app.route("/remove", methods=["POST"])
 @login_required
 def rem():
-    return remove()
+    return remove_participants()
 
 @app.route("/costs", methods=["GET","POST"])
 @login_required
