@@ -8,6 +8,10 @@ function fetchActiveRoute() {
     if (activeroute == "/costs") 
         {activeroute = "/costs_selection"}
 
+        if (activeroute == "/result") 
+        {activeroute = "/results_selection"}
+
+
     return (activeroute)
     
 }

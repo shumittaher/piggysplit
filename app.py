@@ -7,7 +7,7 @@ from credentials import register, login, logout,login_required, session
 from trips import trips, create, select_participants, remove_participants, process_trip_id, get_participants, participant_selection
 from costs import costs, remove_cost, cost_selection
 from payments import payments, fetch_tripwise_payments, record_payment, delete_payment
-from result import result
+from result import result, results_selection
 
 # Configure application
 app = Flask(__name__)
@@ -84,6 +84,11 @@ def pay():
 @login_required
 def rem_cost():
     return remove_cost()
+
+@app.route("/results_selection")
+@login_required
+def result_select():
+    return results_selection()
 
 @app.route("/result", methods=["GET","POST"])
 @login_required

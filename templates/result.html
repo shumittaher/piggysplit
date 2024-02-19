@@ -8,17 +8,53 @@
 
 <table class="table caption-top table-striped">
     <caption style="text-align: center;">
-        <h3>Report</h3>
+        <h3>Bill Report</h3>
     </caption>
 
     <thead>
         <tr>
             <th scope="col" class="text-center">Name</th>
-            <th scope="col" class="text-center">Receivable</th>
+            <th scope="col" class="text-center">Bill Amount</th>
+            <th scope="col" class="text-center">Payment Received</th>
+            <th scope="col" class="text-center">Payment Outstanding</th>
+        </tr>
+    </thead>
+
+    <tbody class="table-group-divider">
+
+        <tr>
+            <th scope="row" class="text-center">
+                {{vendor_row.party}}
+            </th>
+            <td class="text-center">
+                {{"%.2f"|format(vendor_row.receivable_amount)}}
+            </td>
+
+            <td class="text-center">
+                {{"%.2f"|format(vendor_row.received_amount)}}
+            </td>
+
+            <td class="text-center">
+                {{"%.2f"|format(vendor_row.outstanding_amount)}}
+
+            </td>
+        </tr>
+    </tbody>
+
+</table>
+
+<table class="table caption-top table-striped">
+    <caption style="text-align: center;">
+        <h3>Users Report</h3>
+    </caption>
+
+    <thead>
+        <tr>
+            <th scope="col" class="text-center">Name</th>
             <th scope="col" class="text-center">Payable</th>
             <th scope="col" class="text-center">Received</th>
             <th scope="col" class="text-center">Paid</th>
-            <th scope="col" class="text-center">Outstanding</th>
+            <th scope="col" class="text-center">Outstanding Payment</th>
         </tr>
     </thead>
 
@@ -30,9 +66,6 @@
             <th scope="row" class="text-center">
                 {{outstanding.party}}
             </th>
-            <td class="text-center">
-                {{"%.2f"|format(outstanding.receivable_amount)}}
-            </td>
             <td class="text-center">
                 {{"%.2f"|format(outstanding.payable_amounts)}}
             </td>
