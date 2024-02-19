@@ -1,4 +1,4 @@
-{% import 'selection_screen.jinja' as selection %}
+{% import 'selection_screen.html' as selection %}
 {% extends "layout.html" %}
 
 {% block title %}
@@ -25,7 +25,7 @@
     </form>
 
     <div class="mt-5">
-        {{selection.trip_select(current_trips)}}
+        {{selection.trip_select(current_trips, route_name)}}
     </div>
 </div>
 {% endblock %}

@@ -1,0 +1,13 @@
+{% import 'selection_screen.html' as selection %}
+
+{% extends "layout.html" %}
+
+{% block title %}
+    Select Trip
+{% endblock %}
+
+{% block main %}
+
+    {{selection.trip_select(current_trips, route_name)}}
+
+{% endblock %}

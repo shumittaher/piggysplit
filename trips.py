@@ -5,7 +5,7 @@ from trips_helpers import process_trip_id, owned, check_existing, add_participen
 def trips():
     
     owned_trips = fetch_owned_trips(session["user_id"])
-    return render_template("trips.html", current_trips = owned_trips)
+    return render_template("trips.html", current_trips = owned_trips, route_name = "select")
 
 def create():
     tripname = request.form.get("tripname")
@@ -67,5 +67,5 @@ def remove_participants():
 def participant_selection():
     
     owned_trips = fetch_owned_trips(session["user_id"])
-    return render_template("participant_selection.html", current_trips = owned_trips)
+    return render_template("trip_selection.html", current_trips = owned_trips, route_name = "select")
  

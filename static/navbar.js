@@ -5,6 +5,9 @@ function fetchActiveRoute() {
     if (activeroute == "/select") 
         {activeroute = "/participants"}
 
+    if (activeroute == "/costs") 
+        {activeroute = "/costs_selection"}
+
     return (activeroute)
     
 }

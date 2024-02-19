@@ -1,5 +1,5 @@
 from flask import request, redirect, render_template, session, flash, url_for
-from trips_helpers import process_trip_id, owned, get_participants
+from trips_helpers import process_trip_id, owned, get_participants, fetch_owned_trips
 from costs_helpers import add_costs, remove_costline, total_trip_cost, fetch_costlines
 from app import db
 
@@ -38,3 +38,10 @@ def remove_cost():
     remove_costline(cost_id)
 
     return redirect(url_for('cos', trip_id = trip_id))
+
+
+def cost_selection():
+    
+    owned_trips = fetch_owned_trips(session["user_id"])
+    return render_template("trip_selection.html", current_trips = owned_trips, route_name = "costs")
+ 

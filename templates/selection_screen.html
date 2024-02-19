@@ -1,0 +1,47 @@
+
+{% macro trip_select(current_trips, route_name) %}
+
+<div>
+
+    {% if current_trips %}
+    <table class="table caption-top table-striped">
+        <caption style="text-align: center;">
+            <h3>Open Trips</h3>
+        </caption>
+        <thead>
+            
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Desc</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            {% for trip in current_trips %}
+            <tr>
+                <th scope="row">{{trip.trip_title}}</th>
+                <td>
+                    {{trip.trip_descrip}}
+                </td>
+                <td>
+                    <form action="/{{route_name}}" method="get">
+                        <input name="trip_id" value="{{trip.trip_id}}" hidden>
+                        <button type="submit" class="btn btn-primary">
+                            Select
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+
+    {% else %}
+
+    <h1>No Current Trips</h1>
+
+    {% endif %}
+
+</div>
+
+{% endmacro %}
