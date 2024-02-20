@@ -2,6 +2,8 @@ from flask import Flask, flash, redirect, render_template, request, jsonify, ses
 from costs_helpers import get_common_cost, get_induvidual_cost, total_trip_cost
 from trips_helpers import get_participants, fetch_user_trips
 from payments_helpers import total_recevied, total_paid
+from babel.numbers import format_decimal
+
 
 
 def result():
@@ -40,11 +42,13 @@ class outstandings_row:
     
 
 def object_to_row(obj):
-    return {"party" : obj.party, 
-            "received_amount": obj.received_amount, 
-            "payable_amounts":obj.payable_amounts, 
-            "paid_amounts": obj.paid_amounts, 
-            "outstanding_amount":obj.calculate_outstanding()}
+    return {
+                "party" : obj.party, 
+                "received_amount": obj.received_amount, 
+                "payable_amounts":obj.payable_amounts, 
+                "paid_amounts": obj.paid_amounts, 
+                "outstanding_amount":format_decimal(obj.calculate_outstanding(), format='#,##0.##;(#)', locale='en')
+            }
 
 def results_selection():
     
