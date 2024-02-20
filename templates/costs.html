@@ -37,7 +37,7 @@
     {% if cost_lines %}
     
     <h4 class="text-center mt-3">
-        Total Cost: {{ "%.2f"|format(total_cost) }}
+        Total Cost: {{total_cost}}
     </h4> 
     <div class="mt-3">
 
@@ -61,7 +61,7 @@
                         {{cost_line.cost_head}}
                     </th>
                     <td class="text-end">
-                        {{ "%.2f"|format(cost_line.cost_amount) }}
+                        {{cost_line.cost_amount}}
                     </td>
                     <td>
                         {{cost_line.username}}

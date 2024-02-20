@@ -2,7 +2,7 @@ from flask import Flask, flash, redirect, render_template, request, jsonify, ses
 from costs_helpers import get_common_cost, get_induvidual_cost, total_trip_cost
 from trips_helpers import get_participants, fetch_user_trips
 from payments_helpers import total_recevied, total_paid
-from babel.numbers import format_decimal
+from result_helpers import format_fixer
 
 
 
@@ -11,9 +11,9 @@ def result():
     trip_id = request.args.get("trip_id")
 
     vendor_row = {"party" : "Vendor", 
-                  "receivable_amount": total_trip_cost(trip_id), 
-                  "received_amount": total_recevied(trip_id, 0), 
-                  "outstanding_amount":total_trip_cost(trip_id) - total_recevied(trip_id, 0)}
+                  "receivable_amount": format_fixer(total_trip_cost(trip_id)), 
+                  "received_amount": format_fixer(total_recevied(trip_id, 0)), 
+                  "outstanding_amount":format_fixer(total_trip_cost(trip_id) - total_recevied(trip_id, 0))}
 
 
     outstandings = []
@@ -44,10 +44,10 @@ class outstandings_row:
 def object_to_row(obj):
     return {
                 "party" : obj.party, 
-                "received_amount": obj.received_amount, 
-                "payable_amounts":obj.payable_amounts, 
-                "paid_amounts": obj.paid_amounts, 
-                "outstanding_amount":format_decimal(obj.calculate_outstanding(), format='#,##0.##;(#)', locale='en')
+                "received_amount": format_fixer(obj.received_amount), 
+                "payable_amounts":format_fixer(obj.payable_amounts), 
+                "paid_amounts": format_fixer(obj.paid_amounts), 
+                "outstanding_amount":format_fixer(obj.calculate_outstanding())
             }
 
 def results_selection():

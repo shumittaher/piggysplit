@@ -1,4 +1,5 @@
 from app import db
+from result_helpers import format_fix_table
 
 def record_payment(payer_id, payee_id, trip_id, payment_desc, payment_amount):
     db.execute('''INSERT INTO payments
@@ -7,12 +8,12 @@ def record_payment(payer_id, payee_id, trip_id, payment_desc, payment_amount):
                payer_id, payee_id, trip_id, payment_desc, payment_amount)
     
 def fetch_tripwise_payments(trip_id):
-    return db.execute('''SELECT *
+    return format_fix_table(db.execute('''SELECT *
                       FROM payments
                       LEFT JOIN users
                       ON paid_to = id
                       WHERE trip_id = ?
-                      ''', trip_id)
+                      ''', trip_id), "payment_amount")
 
 def delete_payment(payment_id):
     db.execute('''DELETE FROM payments

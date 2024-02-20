@@ -2,7 +2,7 @@ from flask import request, redirect, render_template, session, flash, url_for
 from trips_helpers import process_trip_id, owned, get_participants, fetch_owned_trips
 from costs_helpers import add_costs, remove_costline, total_trip_cost, fetch_costlines
 from app import db
-
+from result_helpers import format_fixer, format_fix_table
 
 def costs():
 
@@ -22,9 +22,9 @@ def costs():
     selected_trip_id = request.args.get("trip_id")
     selected_trip = process_trip_id(selected_trip_id)
 
-    cost_lines = fetch_costlines(selected_trip_id)
-    
-    total_cost = total_trip_cost(selected_trip_id)
+    cost_lines = format_fix_table(fetch_costlines(selected_trip_id)  , "cost_amount")
+  
+    total_cost = format_fixer(total_trip_cost(selected_trip_id))
 
     participants = get_participants(selected_trip_id)
 
@@ -44,4 +44,3 @@ def cost_selection():
     
     owned_trips = fetch_owned_trips(session["user_id"])
     return render_template("trip_selection.html", current_trips = owned_trips, route_name = "costs")
- 
