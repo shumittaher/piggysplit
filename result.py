@@ -2,7 +2,7 @@ from flask import Flask, flash, redirect, render_template, request, jsonify, ses
 from costs_helpers import get_common_cost, get_induvidual_cost, total_trip_cost
 from trips_helpers import get_participants, fetch_user_trips, process_trip_id
 from payments_helpers import total_recevied, total_paid
-from result_helpers import format_fixer, object_to_row, outstandings_row
+from result_helpers import format_fixer, object_to_row, outstandings_row, format_fix_table
 
 
 
@@ -11,11 +11,13 @@ def result():
     trip_id = request.args.get("trip_id")
     trip_details = process_trip_id(trip_id)
 
+    vendor_outstanding = total_trip_cost(trip_id) - total_recevied(trip_id, 0)
     vendor_row = {"party" : "Vendor", 
                   "receivable_amount": format_fixer(total_trip_cost(trip_id)), 
                   "received_amount": format_fixer(total_recevied(trip_id, 0)), 
-                  "outstanding_amount":format_fixer(total_trip_cost(trip_id) - total_recevied(trip_id, 0))}
-
+                  "outstanding_amount":format_fixer(vendor_outstanding)}
+    
+    # suggestions = [{"payer": "", "payee" : 0, "payable": -1 * vendor_outstanding}]
 
     outstandings = []
     participants = get_participants(trip_id)
@@ -28,11 +30,17 @@ def result():
         participant_object = outstandings_row(participant["username"], payable_amounts, recevied_amount, paid_amount)
         participant_row = object_to_row(participant_object)
         outstandings.append(participant_row)
-
-    return render_template("result.html", outstandings = outstandings, vendor_row = vendor_row, trip_details = trip_details)
+    
+        # suggestion = object_to_row(participant_object)
+    
+    suggestions = get_suggestions()
+    
+    return render_template("result.html", outstandings = format_fix_table(outstandings), vendor_row = vendor_row, suggestions = suggestions, trip_details = trip_details)
 
 def results_selection():
     
     participated_trips = fetch_user_trips(session["user_id"])
     return render_template("trip_selection.html", current_trips = participated_trips, route_name = "result")
  
+def get_suggestions():
+    return

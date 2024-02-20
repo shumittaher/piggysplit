@@ -8,24 +8,25 @@ def format_fixer(amount):
 
 
 
-def format_fix_table(table, fix_key):
+def format_fix_table(table):
     lines = []
     for line in table:
         newline = line.copy()
-        newline[f"{fix_key}"] = format_fixer(line[f"{fix_key}"])
+        for item in newline.items():
+            if type(item[1]) in (int, float, complex):
+                newline[item[0]] = format_fixer(item[1])
         lines.append(newline)
-
     return lines
 
 def object_to_row(obj):
     return {
                 "party" : obj.party, 
-                "received_amount": format_fixer(obj.received_amount), 
-                "payable_amounts":format_fixer(obj.payable_amounts), 
-                "paid_amounts": format_fixer(obj.paid_amounts), 
-                "outstanding_amount":format_fixer(obj.calculate_outstanding())
+                "received_amount": obj.received_amount, 
+                "payable_amounts":obj.payable_amounts, 
+                "paid_amounts": obj.paid_amounts, 
+                "outstanding_amount":obj.calculate_outstanding()
             }
- 
+
 class outstandings_row:
     def __init__(self, party, payable_amounts, received_amount, paid_amounts):
         self.party= party
@@ -35,3 +36,4 @@ class outstandings_row:
 
     def calculate_outstanding(self):
         return (self.payable_amounts - self.paid_amounts + self.received_amount)
+

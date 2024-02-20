@@ -15,7 +15,7 @@ def fetch_tripwise_payments(trip_id):
                         LEFT JOIN users as payers
                         ON payer_id = payers.id
                         WHERE trip_id = ?
-                        ''', trip_id), "payment_amount")
+                        ''', trip_id))
 
 def delete_payment(payment_id):
     db.execute('''DELETE FROM payments

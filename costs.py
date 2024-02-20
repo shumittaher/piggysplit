@@ -22,7 +22,7 @@ def costs():
     selected_trip_id = request.args.get("trip_id")
     selected_trip = process_trip_id(selected_trip_id)
 
-    cost_lines = format_fix_table(fetch_costlines(selected_trip_id)  , "cost_amount")
+    cost_lines = format_fix_table(fetch_costlines(selected_trip_id))
   
     total_cost = format_fixer(total_trip_cost(selected_trip_id))
 
