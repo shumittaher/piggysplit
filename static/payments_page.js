@@ -67,8 +67,8 @@ function place_payments_details(data) {
         let payee
         payment_details_table.hidden = false
         payments.forEach(payment_row => {
-            if (payment_row.username){
-                payee = payment_row.username
+            if (payment_row.payeename){
+                payee = payment_row.payeename
             } else if (payment_row.paid_to == 0){
                 payee = "Vendor"
             }
@@ -82,6 +82,9 @@ function place_payments_details(data) {
                     </td>
                     <td class="text-end">
                         ${payment_row.payment_amount}
+                    </td>
+                    <td class="text-end">
+                        ${payment_row.payer_name}
                     </td>
                     <td>
                         <button onclick="handle_delete(${payment_row.payment_id}, ${payment_row.trip_id})" class="btn-close" aria-label="Remove"></button>

@@ -8,12 +8,14 @@ def record_payment(payer_id, payee_id, trip_id, payment_desc, payment_amount):
                payer_id, payee_id, trip_id, payment_desc, payment_amount)
     
 def fetch_tripwise_payments(trip_id):
-    return format_fix_table(db.execute('''SELECT *
-                      FROM payments
-                      LEFT JOIN users
-                      ON paid_to = id
-                      WHERE trip_id = ?
-                      ''', trip_id), "payment_amount")
+    return format_fix_table(db.execute('''SELECT *,payees.username as payeename, payers.username as payer_name
+                        FROM payments
+                        LEFT JOIN users as payees
+                        ON paid_to = payees.id
+                        LEFT JOIN users as payers
+                        ON payer_id = payers.id
+                        WHERE trip_id = ?
+                        ''', trip_id), "payment_amount")
 
 def delete_payment(payment_id):
     db.execute('''DELETE FROM payments
