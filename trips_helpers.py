@@ -29,13 +29,13 @@ def process_trip_id(id):
         flash("Invalid")
     return selected_trip
 
-def remove_participants(relationship_id):
+def remove_participant(relationship_id):
     db.execute("DELETE FROM participants WHERE relationship_id = ?", relationship_id)
 
 def get_participants(selected_trip_id):
-    return db.execute('''SELECT username, id
+    return db.execute('''SELECT username, id, relationship_id
                               FROM participants 
-                              JOIN users
+                              LEFT JOIN users
                               ON participant_id = id
                               WHERE trip_id =?''', selected_trip_id)
 

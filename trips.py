@@ -1,6 +1,6 @@
 from flask import request, redirect, render_template, session, flash, url_for
 from app import db
-from trips_helpers import process_trip_id, owned, check_existing, add_participents, remove_participants, get_participants, fetch_owned_trips
+from trips_helpers import process_trip_id, owned, check_existing, add_participents, remove_participant, get_participants, fetch_owned_trips
 
 def trips():
     
@@ -59,7 +59,7 @@ def select_participants():
 def remove_participants():
 
     relationship_id = request.form.get("relationship_id")
-    remove_participants(relationship_id)
+    remove_participant(relationship_id)
     trip_id = request.form.get("trip_id")
 
     return redirect(url_for('sel', trip_id = trip_id))

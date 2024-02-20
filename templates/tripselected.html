@@ -11,12 +11,11 @@
     <div>
 
         <form action="/select" method="post">
-
             {% for friend in friends %}
-
+            
             <div class="form-check">
-                <input class="form-check-input participant-checkbox" name="participants[]" type="checkbox" value="{{friend.id}}" id="checkbox-{{friend.username}}">
-                <label class="form-check-label" for="checkbox-{{friend.username}}">
+                <input class="form-check-input participant-checkbox" name="participants[]" type="checkbox" value="{{friend.id}}" id="checkbox-{{friend.id}}">
+                <label class="form-check-label" for="checkbox-{{friend.id}}">
                     {{friend.username}}
                 </label>
             </div>
@@ -43,8 +42,8 @@
 
                 <input hidden aria-hidden="true" name="relationship_id" value="{{participant.relationship_id}}">
                 <input hidden aria-hidden="true" name="trip_id" value="{{selected_trip.trip_id}}">
-
-                <h4 class="added-participants">
+                <label hidden class="added-participants">{{participant.id}}</label>
+                <h4>
                     {{participant.username}}
                 </h4>
 
