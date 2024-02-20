@@ -21,6 +21,7 @@ def format_fix_table(table):
 def object_to_row(obj):
     return {
                 "party" : obj.party, 
+                "receivable_amount": obj.receivable_amount, 
                 "received_amount": obj.received_amount, 
                 "payable_amounts":obj.payable_amounts, 
                 "paid_amounts": obj.paid_amounts, 
@@ -28,12 +29,13 @@ def object_to_row(obj):
             }
 
 class outstandings_row:
-    def __init__(self, party, payable_amounts, received_amount, paid_amounts):
+    def __init__(self, party, receivable_amount, payable_amounts, received_amount, paid_amounts):
         self.party= party
+        self.receivable_amount = receivable_amount
         self.received_amount = received_amount
         self.payable_amounts = payable_amounts
         self.paid_amounts = paid_amounts
 
     def calculate_outstanding(self):
-        return (self.payable_amounts - self.paid_amounts + self.received_amount)
+        return (self.payable_amounts - self.paid_amounts + self.received_amount - self.receivable_amount)
 
