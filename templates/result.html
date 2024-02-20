@@ -24,6 +24,7 @@
     </thead>
 
     <tbody class="table-group-divider">
+        {% for vendor_row in vendor_rows %}
         <tr>
             <th scope="row" class="text-center">
                 {{vendor_row.party}}
@@ -41,6 +42,7 @@
 
             </td>
         </tr>
+        {% endfor %}
     </tbody>
 
 </table>

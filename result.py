@@ -11,8 +11,9 @@ def result():
     trip_id = request.args.get("trip_id")
     trip_details = process_trip_id(trip_id)
 
+    vendor_rows = []
     # vendor_outstanding = total_trip_cost(trip_id) - total_recevied(trip_id, 0)
-    vendor_row = object_to_row(outstandings_row("Vendor", (total_trip_cost(trip_id)),0,(total_recevied(trip_id, 0)), 0))
+    vendor_rows.append(object_to_row(outstandings_row("Vendor", (total_trip_cost(trip_id)),0,(total_recevied(trip_id, 0)), 0), True))
     
     # suggestions = [{"payer": "", "payee" : 0, "payable": -1 * vendor_outstanding}]
 
@@ -32,7 +33,7 @@ def result():
     
     suggestions = get_suggestions()
     
-    return render_template("result.html", outstandings = format_fix_table(outstandings), vendor_row = vendor_row, suggestions = suggestions, trip_details = trip_details)
+    return render_template("result.html", outstandings = format_fix_table(outstandings), vendor_rows = format_fix_table(vendor_rows), suggestions = suggestions, trip_details = trip_details)
 
 def results_selection():
     

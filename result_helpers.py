@@ -18,14 +18,14 @@ def format_fix_table(table):
         lines.append(newline)
     return lines
 
-def object_to_row(obj):
+def object_to_row(obj, vendor = -1):
     return {
                 "party" : obj.party, 
                 "receivable_amount": obj.receivable_amount, 
                 "received_amount": obj.received_amount, 
                 "payable_amounts":obj.payable_amounts, 
                 "paid_amounts": obj.paid_amounts, 
-                "outstanding_amount":obj.calculate_outstanding()
+                "outstanding_amount":obj.calculate_outstanding() * (vendor * -1)
             }
 
 class outstandings_row:
