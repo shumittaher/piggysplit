@@ -1,7 +1,10 @@
 from babel.numbers import format_decimal
 
 def format_fixer(amount):
-    return format_decimal(amount, format='#,##0.##;(#)', locale='en')
+    fixed_amount =  format_decimal(amount, format='#,##0.##;(#)', locale='en')
+    if amount == 0:
+        fixed_amount = "Nil"
+    return fixed_amount
 
 
 
