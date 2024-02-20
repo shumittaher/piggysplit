@@ -14,8 +14,9 @@ def result():
 
     vendor_rows = []
     vendor_object = outstandings_row("Vendor", (total_trip_cost(trip_id)),0,(total_recevied(trip_id, 0)), 0)
-    vendor_rows.append(object_to_row(vendor_object, True))
-    current_state.append(object_to_row(vendor_object))
+    vendor_row = object_to_row(vendor_object, True)
+    vendor_rows.append(vendor_row)
+    current_state.append({"party": 0, "outstanding_amount": -1 * vendor_row["outstanding_amount"]})
     
     outstandings = []
     participants = get_participants(trip_id)
@@ -28,7 +29,7 @@ def result():
         participant_object = outstandings_row(participant["username"], 0, payable_amounts, recevied_amount, paid_amount)
         participant_row = object_to_row(participant_object)
         outstandings.append(participant_row)
-        current_state.append(participant_row)
+        current_state.append({"party": participant["id"], "outstanding_amount": participant_row["outstanding_amount"]})
     
         # suggestion = object_to_row(participant_object)
     

@@ -3,8 +3,11 @@
 
 def get_suggestions(current_state):
 
-    largest_party = find_edge(current_state, True)
-    smallest_party =  find_edge(current_state, False)
+    transactions = []    
+
+    record_transactions(current_state, transactions)
+
+    print(transactions)
 
     return
 
@@ -23,3 +26,34 @@ def find_edge(array, finding_large):
         if condition(item["outstanding_amount"], largest["outstanding_amount"], finding_large):
             largest = item
     return largest
+
+def record_transactions(current_state, transactions):
+    
+
+    largest_party = find_edge(current_state, True)
+    smallest_party =  find_edge(current_state, False)
+
+    if largest_party["outstanding_amount"] == smallest_party["outstanding_amount"]:
+        return transactions
+    
+    if largest_party["outstanding_amount"] > smallest_party["outstanding_amount"] * -1 :
+        amount = smallest_party["outstanding_amount"] * -1
+    else:
+        amount = largest_party["outstanding_amount"] 
+    transaction = {"payer": largest_party["party"], "payee": smallest_party["party"], "amount": amount}
+    current_state = update_current_state(current_state, transaction)
+    transactions.append(transaction)
+    
+    record_transactions(current_state, transactions)
+
+def update_current_state(current_state, transaction):
+
+    for idx, item in enumerate(current_state):
+        if item["party"] == transaction["payer"]:
+            item["outstanding_amount"] = item["outstanding_amount"] - transaction["amount"]
+        elif item["party"] == transaction["payee"]:
+            item["outstanding_amount"] = item["outstanding_amount"] + transaction["amount"]
+        if item["outstanding_amount"] == 0:
+            current_state.pop(idx)
+
+    return current_state
