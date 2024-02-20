@@ -69,7 +69,7 @@ function place_payments_details(data) {
         payments.forEach(payment_row => {
             if (payment_row.payeename){
                 payee = payment_row.payeename
-            } else if (payment_row.paid_to == 0){
+            } else {
                 payee = "Vendor"
             }
             payment_details_area.innerHTML += `
