@@ -1,6 +1,6 @@
 from flask import Flask, flash, redirect, render_template, request, jsonify, session
 from costs_helpers import get_common_cost, get_induvidual_cost, total_trip_cost
-from trips_helpers import get_participants, fetch_user_trips
+from trips_helpers import get_participants, fetch_user_trips, process_trip_id
 from payments_helpers import total_recevied, total_paid
 from result_helpers import format_fixer
 
@@ -9,6 +9,7 @@ from result_helpers import format_fixer
 def result():
 
     trip_id = request.args.get("trip_id")
+    trip_details = process_trip_id(trip_id)
 
     vendor_row = {"party" : "Vendor", 
                   "receivable_amount": format_fixer(total_trip_cost(trip_id)), 
@@ -28,7 +29,7 @@ def result():
         participant_row = object_to_row(participant_object)
         outstandings.append(participant_row)
 
-    return render_template("result.html", outstandings = outstandings, vendor_row = vendor_row)
+    return render_template("result.html", outstandings = outstandings, vendor_row = vendor_row, trip_details = trip_details)
 
 class outstandings_row:
     def __init__(self, party, payable_amounts, received_amount, paid_amounts):
