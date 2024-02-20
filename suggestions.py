@@ -3,13 +3,10 @@
 
 def get_suggestions(current_state):
 
-    transactions = []    
-
+    transactions = []
     record_transactions(current_state, transactions)
 
-    print(transactions)
-
-    return
+    return transactions
 
 def find_edge(array, finding_large):
 
