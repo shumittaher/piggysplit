@@ -35,7 +35,7 @@ def result():
         outstandings.append(participant_row)
         current_state.append({"partyname": participant["username"] , "party": participant["id"], "outstanding_amount": participant_row["outstanding_amount"]})
         
-    suggestions = get_suggestions(current_state)
+    suggestions = sorted(get_suggestions(current_state), key=lambda x: x['payer_name'])
     
     return render_template("result.html", outstandings = format_fix_table(outstandings), vendor_rows = format_fix_table(vendor_rows), suggestions = format_fix_table(suggestions), trip_details = trip_details)
 
