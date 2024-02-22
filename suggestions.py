@@ -47,10 +47,8 @@ def update_current_state(current_state, transaction):
 
     for item in current_state:
         if item["party"] == transaction["payer"]:
-            print(item["party"])
             item["outstanding_amount"] = item["outstanding_amount"] - transaction["amount"]
         elif item["party"] == transaction["payee"]:
-            print(item["party"])
             item["outstanding_amount"] = item["outstanding_amount"] + transaction["amount"]
     for idx, item in enumerate(current_state):
         if item["outstanding_amount"] == 0:
