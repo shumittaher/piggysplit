@@ -37,7 +37,7 @@ def result():
         
     suggestions = get_suggestions(current_state)
     
-    return render_template("result.html", outstandings = format_fix_table(outstandings), vendor_rows = format_fix_table(vendor_rows), suggestions = suggestions, trip_details = trip_details)
+    return render_template("result.html", outstandings = format_fix_table(outstandings), vendor_rows = format_fix_table(vendor_rows), suggestions = format_fix_table(suggestions), trip_details = trip_details)
 
 def results_selection():
     
