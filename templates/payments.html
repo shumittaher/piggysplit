@@ -20,7 +20,7 @@
     <form onsubmit="submit_payment(event)" class="d-flex" method="post">
         <input hidden id="trip_id_area" name="trip_id">
         <textarea aria-label="Payment Details" class="form-control" name="payment_desc" placeholder="Payment Details" rows="1"></textarea>
-        <input class="form-control" name="payment_amount" type="number">
+        <input class="form-control" name="payment_amount" type="number" step=".01">
         <select class="form-select mx-1" aria-label="participant Selection" name="participant_id" id="participant_options">
         </select>
         <input class="btn btn-outline-primary" type="submit">

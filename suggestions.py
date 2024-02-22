@@ -39,8 +39,10 @@ def record_transactions(current_state, transactions):
     
     transaction = {"payer": largest_party["party"], "payer_name": largest_party["partyname"], "payee": smallest_party["party"],"payee_name": smallest_party["partyname"], "amount": amount}
     current_state = update_current_state(current_state, transaction)
-    transactions.append(transaction)
     
+    if amount != 0:
+        transactions.append(transaction)
+
     record_transactions(current_state, transactions)
 
 def update_current_state(current_state, transaction):
@@ -53,4 +55,5 @@ def update_current_state(current_state, transaction):
     for idx, item in enumerate(current_state):
         if item["outstanding_amount"] == 0:
             current_state.pop(idx)
+
     return current_state
