@@ -102,7 +102,30 @@
     
 </div>
 
-<button class="btn btn-lg btn-primary">Close Trip</button>
+<button id="close_button" onclick="handle_close_trip(`{{trip_details.trip_id}}`)" class="btn btn-lg btn-primary">Close Trip</button>
+
+
+<script>
+
+function handle_close_trip(trip_id) {
+
+    fetch("/close_trips", {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ "data" : trip_id })
+    })
+    .then(response => response.json())
+    .then(result => after_close())
+    .catch(error => console.error(error));
+
+}
+
+function after_close() {
+    close_button = document.getElementById("close_button")
+    close_button.hidden = true
+}
+
+</script>
 
 
 {% endblock %}

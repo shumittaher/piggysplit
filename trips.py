@@ -68,4 +68,11 @@ def participant_selection():
     
     owned_trips = fetch_owned_trips(session["user_id"])
     return render_template("trip_selection.html", current_trips = owned_trips, route_name = "select")
+
+def close_trip(trip_id):
+    db.execute('''
+               UPDATE trips
+               SET closed  = 1
+               WHERE trip_id = ?
+               ''', trip_id)
  

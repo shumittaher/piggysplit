@@ -1,10 +1,10 @@
 from cs50 import SQL
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, flash
 from flask_session import Session
 db = SQL("sqlite:///piggysplit.db")
 
 from credentials import register, login, logout,login_required, session
-from trips import trips, create, select_participants, remove_participants, process_trip_id, get_participants, participant_selection
+from trips import trips, create, select_participants, remove_participants, process_trip_id, get_participants, participant_selection, close_trip
 from costs import costs, remove_cost, cost_selection
 from payments import payments, fetch_tripwise_payments, record_payment, delete_payment
 from result import result, results_selection
@@ -134,4 +134,13 @@ def remove_payment():
     payments_data = fetch_tripwise_payments(trip_id)
 
     return jsonify({'payments_data': payments_data})
+
+@app.route("/close_trips", methods=["POST"])
+def close_trips():
+    
+    trip_id = request.get_json().get('data')
+    print(trip_id)
+    close_trip(trip_id)
+    flash("Trip Closed")
+    return jsonify({'result': "Success"})
 
