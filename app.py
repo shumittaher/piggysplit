@@ -1,5 +1,5 @@
 from cs50 import SQL
-from flask import Flask, render_template, request, jsonify, flash
+from flask import Flask, render_template, request, jsonify, flash, redirect, url_for
 from flask_session import Session
 db = SQL("sqlite:///piggysplit.db")
 
@@ -138,9 +138,8 @@ def remove_payment():
 @app.route("/close_trips", methods=["POST"])
 def close_trips():
     
-    trip_id = request.get_json().get('data')
+    trip_id = request.form.get('trip_id')
     print(trip_id)
     close_trip(trip_id)
     flash("Trip Closed")
-    return jsonify({'result': "Success"})
-
+    return redirect(url_for('res', trip_id = trip_id))

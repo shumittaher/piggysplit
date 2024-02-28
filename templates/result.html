@@ -102,30 +102,17 @@
     
 </div>
 
-<button id="close_button" onclick="handle_close_trip(`{{trip_details.trip_id}}`)" class="btn btn-lg btn-primary">Close Trip</button>
+{% if trip_details.closed == 0 %}
 
+<form action="/close_trips" method="post">
+    <input name="trip_id" hidden value="{{trip_details.trip_id}}">
+    <input type="submit" class="btn btn-lg btn-primary" value="Close Trip">
+</form>
 
-<script>
+{% else %}
 
-function handle_close_trip(trip_id) {
+<h1> Trip Closed </h1>
 
-    fetch("/close_trips", {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ "data" : trip_id })
-    })
-    .then(response => response.json())
-    .then(result => after_close())
-    .catch(error => console.error(error));
-
-}
-
-function after_close() {
-    close_button = document.getElementById("close_button")
-    close_button.hidden = true
-}
-
-</script>
-
+{% endif %}
 
 {% endblock %}
