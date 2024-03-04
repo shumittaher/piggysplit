@@ -27,6 +27,6 @@ Once registration is complete, user can use the log-in route to log in into the 
 
 ### Creating Trips:
 
-
+In order to create trips / events, user needs to go to the trips route from the nav bar. 
 
 
