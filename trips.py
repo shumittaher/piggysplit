@@ -10,7 +10,8 @@ def trips():
 def create():
     tripname = request.form.get("tripname")
     tripdesc = request.form.get("tripdesc")
-    db.execute("INSERT INTO trips (trip_title, trip_descrip, owner_id) VALUES (?,?,?)", tripname, tripdesc, session["user_id"])
+    trip_id = db.execute("INSERT INTO trips (trip_title, trip_descrip, owner_id) VALUES (?,?,?)", tripname, tripdesc, session["user_id"])   
+    add_participents(trip_id, session["user_id"])
     flash("Trip Recorded")
     return redirect("/trips")
 
@@ -35,7 +36,7 @@ def select_participants():
             if not check_existing(trip_id, participant):
                 add_participents(trip_id, participant)
             else:
-                flash("Existing Person Not Added")
+                flash(" Existing Person Not Added ")
 
         return redirect(url_for('sel', trip_id = trip_id))
 
