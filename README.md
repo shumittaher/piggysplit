@@ -29,4 +29,22 @@ Once registration is complete, user can use the log-in route to log in into the 
 
 In order to create trips / events, user needs to go to the trips route from the nav bar. 
 
+In this screen, user will have to input trip name and optionally can record a small description so that it is easier to relate for all users involved and click create button to create the trip
+
+The trip will be created in "open" status and it will immidiately be displayed in the screen. the trip can be selected from this space to move to input the participants of this trip.
+
+Alternatively the participants of each trip can be inputted by going to the participants route. 
+
+### Adding Participants
+
+If user comes to this route by clicking the link in the nav bar, first user will need to select the trip from a list of open trips. 
+
+In this screen the trip creator needs to specify which users are the participants of the trip. 
+
+User will be shown a list of potential users that can be added as a participant
+
+Currently 
+
+
+
 
