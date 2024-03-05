@@ -41,9 +41,14 @@ If user comes to this route by clicking the link in the nav bar, first user will
 
 In this screen the trip creator needs to specify which users are the participants of the trip. 
 
-User will be shown a list of potential users that can be added as a participant
+User will be shown a list of potential users that can be added as a participant as a list of checkboxes. This list contains all users recorded in the server at this point. Future development will be made to include a "friend" system where only the friends of the trip creator will be shown as potential participants. 
 
-Currently 
+User will tick the checkboxes for the users user wants to add as participants and create click "add" button to add participants. 
+
+The participants added will be shown in a list in the bottom part of the screen. There is a delete button to remove any participant.
+
+###  Adding Costs
+
 
 
 
