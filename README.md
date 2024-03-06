@@ -49,7 +49,11 @@ The participants added will be shown in a list in the bottom part of the screen.
 
 ###  Adding Costs
 
+User can use this route to add costs incurred during this trip against each trip they have created. During this input, the user needs to mention the cost description and who will bear the cost. A cost line can be mentioned to be done on a shared basis or it can be tagged against an individual participant who will bear that specific cost in that line.
 
+If the cost is tagged as a shared cost, the app will divide this amount among all of the participants equally. 
+
+The amount field in this page accepts only numeric value and upto 2 decimal points. 
 
 
 
