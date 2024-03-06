@@ -101,7 +101,7 @@
 
         </nav>
 
-        <header>
+        <header class="position-absolute w-100">
             {% if get_flashed_messages() %}
                 <div class="alert alert-primary mb-0 text-center" role="alert">
                     {{ get_flashed_messages() | join(" ") }}
@@ -109,7 +109,7 @@
                 {% endif %}
         </header>
             
-        <main class="d-flex flex-column align-items-center">
+        <main class="d-flex flex-column align-items-center mt-5">
             {% block main %}
             {% endblock %} 
         </main>

@@ -57,5 +57,6 @@ The amount field in this page accepts only numeric value and upto 2 decimal poin
 
 When each cost line is created, it will be displayed in the page itself. Here, the line contains a delete button also to quickly delete any wrong input.
 
+### Adding Payments 
 
-
+From this route any of the participants of the trip as defined by the trip's owner can add the payments they have made during the trip. 
