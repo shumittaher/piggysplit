@@ -55,5 +55,7 @@ If the cost is tagged as a shared cost, the app will divide this amount among al
 
 The amount field in this page accepts only numeric value and upto 2 decimal points. 
 
+When each cost line is created, it will be displayed in the page itself. Here, the line contains a delete button also to quickly delete any wrong input.
+
 
 
