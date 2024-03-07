@@ -65,7 +65,18 @@ From this route any of the participants of the trip as defined by the trip's own
 
 Unlike the cost input route, adding payments is not limited to the trip owner. Any of the participants can add payments they have made
 
-The user of this route first needs to select the trip from a dropdown menu. This will show a form where the payments can be inputted. 
+The user of this route first needs to select the trip from a dropdown menu. This will show a form where the payments can be inputted. They will also have the option to add a small description of the payment so that it is easier to identify later on.
 
 It is possible to pay to other participants as well as the vendor. These payables will be settled by the app when the final recommendations are given. 
 
+Every added payment will be displayed below the input form. user will have the option to delete
+
+### Result Window
+
+Finally, when all of the input in the system for costs and payments are completed, any of the participants of the trip can go to the Results Route to see the entire picture at a glance. Here the payabale and receivables of each of the party is shown in 2 tables. 
+
+First table will show the payables to the vendor. This will be calculated from the inputs as costs and the inputs made to vendors in the payments screen. 
+
+The second table will contain how much is payable or receivable of each of the participants of the trip. This is calculated from the shared costs, personal costs and also how much they have received as payments. 
+
+This window will show how much each individual now have to pay in simple sentences like 'A to pay B by x amount'.
