@@ -57,6 +57,15 @@ The amount field in this page accepts only numeric value and upto 2 decimal poin
 
 When each cost line is created, it will be displayed in the page itself. Here, the line contains a delete button also to quickly delete any wrong input.
 
+The costs added will be payable to a party named as the 'vendor'. Any external service provider in the trip is named as the vendor for this app.
+
 ### Adding Payments 
 
 From this route any of the participants of the trip as defined by the trip's owner can add the payments they have made during the trip. 
+
+Unlike the cost input route, adding payments is not limited to the trip owner. Any of the participants can add payments they have made
+
+The user of this route first needs to select the trip from a dropdown menu. This will show a form where the payments can be inputted. 
+
+It is possible to pay to other participants as well as the vendor. These payables will be settled by the app when the final recommendations are given. 
+
