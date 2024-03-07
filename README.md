@@ -79,4 +79,7 @@ First table will show the payables to the vendor. This will be calculated from t
 
 The second table will contain how much is payable or receivable of each of the participants of the trip. This is calculated from the shared costs, personal costs and also how much they have received as payments. 
 
-This window will show how much each individual now have to pay in simple sentences like 'A to pay B by x amount'.
+This window will show how much each individual now have to pay in simple sentences like 'A to pay B by x Amount'.
+
+Users can follow these simple recommendations and settle the costs of the trip among friends without cumbursome calculations.
+
