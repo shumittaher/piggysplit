@@ -13,6 +13,7 @@
         <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon/favicon-16x16.png">
         <link rel="manifest" href="/static/favicon/site.webmanifest">
         <style>
+            
             body {
               font-family: "Trebuchet MS", Helvetica, sans-serif;
             }
@@ -22,6 +23,12 @@
                 width: 100dvw;
                 object-fit: contain;
             }
+
+            .color-gradient{
+                background: rgb(2,0,36);
+                background: linear-gradient(117deg, rgba(2,0,36,1) 0%, rgba(189,0,255,0.7865646746980042) 0%, rgba(0,136,255,1) 100%);
+            }
+
         </style>
         <script src="/static/theme.js"></script>
     </head>
@@ -32,8 +39,9 @@
 
             <div class="container-fluid">
                 
-                <a class="navbar-brand me-5" href="/">
+                <a class="navbar-brand me-5 d-flex" href="/">
                     <img src="../static/images/logo.jpg" alt="piggysplit logo" height="50">
+                    <h1 style="color: blueviolet;">Piggy/SPLIT</h1>
                 </a>
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">         
