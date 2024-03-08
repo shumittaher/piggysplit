@@ -82,4 +82,4 @@ The second table will contain how much is payable or receivable of each of the p
 This window will show how much each individual now have to pay in simple sentences like 'A to pay B by x Amount'.
 
 Users can follow these simple recommendations and settle the costs of the trip among friends without cumbursome calculations.
-
+After being satisfied with the result and recommendations for the trip, the user can then close the trip from this screen which will remove it from the queue.
