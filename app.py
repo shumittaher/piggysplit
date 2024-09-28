@@ -1,7 +1,7 @@
 from cs50 import SQL
+db = SQL("sqlite:///piggysplit.db")
 from flask import Flask, render_template, request, jsonify, flash, redirect, url_for
 from flask_session import Session
-db = SQL("sqlite:///piggysplit.db")
 
 from credentials import register, login, logout,login_required, session
 from trips import trips, create, select_participants, remove_participants, process_trip_id, get_participants, participant_selection, close_trip
